@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\dawiz\\.nuget\\packages\\": {}
+    "C:\\Users\\szymo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\Radiowe\\WpfApp1\\WpfApp1.csproj",
+      "projectUniqueName": "D:\\IntelliJ IDEA\\Radiowe\\Radiowe\\WpfApp1\\WpfApp1.csproj",
       "projectName": "WpfApp1",
-      "projectPath": "D:\\GitHub\\Radiowe\\WpfApp1\\WpfApp1.csproj",
-      "packagesPath": "C:\\Users\\dawiz\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHub\\Radiowe\\WpfApp1\\obj\\",
+      "projectPath": "D:\\IntelliJ IDEA\\Radiowe\\Radiowe\\WpfApp1\\WpfApp1.csproj",
+      "packagesPath": "C:\\Users\\szymo\\.nuget\\packages\\",
+      "outputPath": "D:\\IntelliJ IDEA\\Radiowe\\Radiowe\\WpfApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dawiz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\szymo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -6,7 +6,8 @@ namespace WpfApp1
 {
     class BaseStation
     {
-        int z = 0;
-        int x = 0;
+        static int z = 0;
+        static int x = 0;
+        int y = x + z;
     }
 }

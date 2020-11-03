@@ -349,24 +349,4 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-# Ionide (cross platform F# VS Code tools) working folder
-.ionide/
-WpfApp1/obj/Debug/netcoreapp3.1/App.g.i.cs
-WpfApp1/obj/Debug/netcoreapp3.1/App.g.i.cs
-WpfApp1/obj/Debug/netcoreapp3.1/MainWindow.baml
-WpfApp1/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs
-WpfApp1/obj/Debug/netcoreapp3.1/WpfApp1.assets.cache
-WpfApp1/obj/Debug/netcoreapp3.1/WpfApp1.csprojAssemblyReference.cache
-WpfApp1/obj/Debug/netcoreapp3.1/WpfApp1_MarkupCompile.cache
-WpfApp1/obj/Debug/netcoreapp3.1/WpfApp1_MarkupCompile.i.cache
-WpfApp1/obj/Debug/netcoreapp3.1/WpfApp1_MarkupCompile.lref
-WpfApp1/obj/project.assets.json
-WpfApp1/obj/WpfApp1.csproj.nuget.dgspec.json
-WpfApp1/obj/WpfApp1.csproj.nuget.g.props
-*.dll
-*.exe
-*.cache
-*.dll
-*.exe
-*.pdb
-*.json
+

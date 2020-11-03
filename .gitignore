@@ -363,3 +363,10 @@ WpfApp1/obj/Debug/netcoreapp3.1/WpfApp1_MarkupCompile.lref
 WpfApp1/obj/project.assets.json
 WpfApp1/obj/WpfApp1.csproj.nuget.dgspec.json
 WpfApp1/obj/WpfApp1.csproj.nuget.g.props
+*.dll
+*.exe
+*.cache
+*.dll
+*.exe
+*.pdb
+*.json

@@ -73,6 +73,9 @@
     <Compile Include="Obliczenia\BaseStation.cs" />
     <Compile Include="Obliczenia\Calculations.cs" />
     <Compile Include="Obliczenia\User.cs" />
+
+    <Compile Include="PlaceholderInfoClass.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

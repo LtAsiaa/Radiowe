@@ -22,6 +22,9 @@ namespace WpfApp1
     {
         BaseStation Base = null;
         User user = null;
+
+        List<PlaceholderInfoClass> InfoList = new List<PlaceholderInfoClass>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,8 +37,15 @@ namespace WpfApp1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (TextBoxLokalizacjaX.Text.ToString() == "" || TextBoxLokalizacjaY.Text.ToString() == "" || TextBoxMocNadawcza.Text.ToString() == "" || TextBoxNumerKanalu.Text.ToString() == "" || TextBoxZyskAnteny.Text.ToString() == "")
+
+            if (TextBoxNazwaUzytkownika.Text.ToString() == "" || TextBoxLokalizacjaX.Text.ToString() == "" || TextBoxLokalizacjaY.Text.ToString() == "" || TextBoxMocNadawcza.Text.ToString() == "" || TextBoxNumerKanalu.Text.ToString() == "" || TextBoxZyskAnteny.Text.ToString() == "")
                 MessageBox.Show("Wprowadź poprawnie dane");
+            else
+            {
+                ListBoxUzytkownicy.Items.Add(TextBoxNazwaUzytkownika.Text);
+                InfoList.Add(new PlaceholderInfoClass(TextBoxNazwaUzytkownika.Text, TextBoxLokalizacjaX.Text, TextBoxLokalizacjaY.Text, TextBoxMocNadawcza.Text, TextBoxZyskAnteny.Text, TextBoxNumerKanalu.Text));
+            }
+
         }
         //wytłumacznie zmiennych dla kontrolera, gui i bazy danych:
         //x_b - położenie stacji w osi x (zakładamy rodzaj podanych danych 0 - 200 każdemy indeksowi odpowiada 100 metrów tj. 0 - 0m 1 - 100m, 2 - 200m
@@ -58,6 +68,19 @@ namespace WpfApp1
         private void UserInitialization(int x_u,int y_u, int antena_gain_user,int channel_number)
         {
             user = new User(x_u, y_u, antena_gain_user, channel_number);
+        }
+
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PlaceholderInfoClass usr = InfoList[ListBoxUzytkownicy.SelectedIndex];
+            string msg = "nazwa uzytkownika: " + usr.nazwa + Environment.NewLine + "Lokalizacja x: " + usr.x + Environment.NewLine + "Lokalizacja y: " + usr.y + Environment.NewLine + "Moc nadawcza: " + usr.moc + Environment.NewLine + "Zysk: " + usr.zysk + Environment.NewLine + "Nr kanalu: " + usr.nrkanalu;
+            MessageBox.Show(msg);
+        }
+
+        private void Button2_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

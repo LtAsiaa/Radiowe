@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Radiowe.Interfaces;
 namespace Radiowe
 {
-    class User
+    public class User: ILocationManagment
     {
         public Tuple<int, int> location_;
         int antenna_gain_;
@@ -15,6 +15,18 @@ namespace Radiowe
             location_ = new Tuple<int, int>(x, y);
             antenna_gain_ = antenna_gain;
             channel_number_ = channel_number;
+        }
+        public int GetLocationX()
+        {
+            return location_.Item1;
+        }
+        public int GetLocationY()
+        {
+            return location_.Item2;
+        }
+        public int GetAntenaGain()
+        {
+            return antenna_gain_;
         }
     }
 }

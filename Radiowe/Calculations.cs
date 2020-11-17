@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Radiowe
 {
-    class Calculations
+    public class Calculations
     {
         private double the_distance_;
         private double FSPL_;
@@ -18,35 +18,46 @@ namespace Radiowe
  
 
         public Calculations() { }
-        public void CalculateTheDistace(double x_b, double y_b, double x_u, double y_u)
+        public double CalculateTheDistace(double x_b, double y_b, double x_u, double y_u)
         {
-            the_distance_ = Math.Sqrt(Math.Pow(x_b - x_u, 2) + Math.Pow(y_b - y_u, 2));
+             the_distance_ = Math.Sqrt(Math.Pow(x_b - x_u, 2) + Math.Pow(y_b - y_u, 2));
+            return the_distance_;
         }
-        public void CalculateFSPL(double band)
+        public double CalculateFSPL(double band)
         {
             //  FSPL_ = 32.44d + 20 * Math.Log10(the_distance_) + 20 * Math.Log10(band);
             FSPL_ = 92.45d + 20 * Math.Log10(the_distance_/10) + 20 * Math.Log10((band/10)/1000); // distance w km, band w GHz
+            return FSPL_;
         }
-
-        public void CalculateReceiverPower(double transmitter_power, double transmitter_gain, double receiver_gain)
+        public double CalculateFSPL2(double band,double x)
+        {
+            //  FSPL_ = 32.44d + 20 * Math.Log10(the_distance_) + 20 * Math.Log10(band);
+            FSPL_ = 92.45d + 20 * Math.Log10(x ) + 20 * Math.Log10(band ); // distance w km, band w GHz
+            return FSPL_;
+        }
+        public double CalculateReceiverPower(double transmitter_power, double transmitter_gain, double receiver_gain)
         {
             receiver_power = transmitter_power - FSPL_ + transmitter_gain + receiver_gain -4; // 4 odpowiada NF (noise figure)
+            return receiver_power;
         }
 
-        public void CalculateI_(double transmitter_interference_power) // pytanie
+        public double CalculateI_(double transmitter_interference_power) // pytanie
         {
             I_ = transmitter_interference_power - FSPL_;
+            return I_;
         }
 
-        public void CalculateNoise(double band)
+        public double CalculateNoise(double band)
         {
-            N_ = -174 + 10 * Math.Log10((band/10)*1000000); // szerokośc pasma musi być w Hz 
+            N_ = -174 + 10 * Math.Log10(band); // szerokośc pasma musi być w Hz 
             // N_ w dBm
+            return N_;
         }
-        public void CalculateSNR_Receiver()
+        public double CalculateSNR_Receiver()
         {
-            SNR_ = receiver_power - N_; 
+            SNR_ = receiver_power - N_;
             // SNR w dB
+            return SNR_;
         }
         public void CalculateSINR() // ten sam kanał
         {

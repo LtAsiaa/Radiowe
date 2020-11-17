@@ -22,7 +22,9 @@ namespace WpfApp1
     {
         BaseStation Base = null;
         User user = null;
+
         List<PlaceholderInfoClass> InfoList = new List<PlaceholderInfoClass>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,6 +37,7 @@ namespace WpfApp1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             if (TextBoxNazwaUzytkownika.Text.ToString() == "" || TextBoxLokalizacjaX.Text.ToString() == "" || TextBoxLokalizacjaY.Text.ToString() == "" || TextBoxMocNadawcza.Text.ToString() == "" || TextBoxNumerKanalu.Text.ToString() == "" || TextBoxZyskAnteny.Text.ToString() == "")
                 MessageBox.Show("Wprowadź poprawnie dane");
             else
@@ -42,6 +45,7 @@ namespace WpfApp1
                 ListBoxUzytkownicy.Items.Add(TextBoxNazwaUzytkownika.Text);
                 InfoList.Add(new PlaceholderInfoClass(TextBoxNazwaUzytkownika.Text, TextBoxLokalizacjaX.Text, TextBoxLokalizacjaY.Text, TextBoxMocNadawcza.Text, TextBoxZyskAnteny.Text, TextBoxNumerKanalu.Text));
             }
+
         }
         //wytłumacznie zmiennych dla kontrolera, gui i bazy danych:
         //x_b - położenie stacji w osi x (zakładamy rodzaj podanych danych 0 - 200 każdemy indeksowi odpowiada 100 metrów tj. 0 - 0m 1 - 100m, 2 - 200m
@@ -65,6 +69,7 @@ namespace WpfApp1
         {
             user = new User(x_u, y_u, antena_gain_user, channel_number);
         }
+
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

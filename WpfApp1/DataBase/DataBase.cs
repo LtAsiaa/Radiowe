@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 
-namespace Radio
+namespace WpfApp1
 {
     static partial class Base
     {
@@ -51,7 +52,7 @@ namespace Radio
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Nie można połączyć z serwerem baz danych\n" + ex.Message, "Waga Pro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nie można połączyć z serwerem baz danych\n" + ex.Message, "Radio");
 
                 _p = false;
                 return false;

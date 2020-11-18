@@ -13,7 +13,9 @@ C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\MainWindow.
 C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.g.resources
 C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.AssemblyInfoInputs.cache
 C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.AssemblyInfo.cs
-C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.csproj.CoreCompileInputs.cache
 C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.dll
 C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.pdb
 C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.genruntimeconfig.cache
+C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.csproj.CoreCompileInputs.cache
+C:\Users\Wojtek\source\repos\WpfApp1\WpfApp1\obj\Debug\netcoreapp3.1\WpfApp1.csproj.CopyComplete

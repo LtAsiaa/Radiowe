@@ -68,6 +68,7 @@ namespace WpfApp1
         private void UserInitialization(int x_u,int y_u, int antena_gain_user,int channel_number)
         {
             user = new User(x_u, y_u, antena_gain_user, channel_number);
+            ///
         }
 
 

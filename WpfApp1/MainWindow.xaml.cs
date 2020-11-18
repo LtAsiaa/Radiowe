@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySqlConnector;
 
 namespace WpfApp1
 {
@@ -44,13 +45,13 @@ namespace WpfApp1
                 TextBoxMocNadawcza.Text.ToString() == "" || 
                 TextBoxNumerKanalu.Text.ToString() == "" ||
                 TextBoxZyskAnteny.Text.ToString() == "" ||
-                System.Text.RegularExpressions.Regex.IsMatch(TextBoxLokalizacjaX.Text, "[^.,0-9]") ||
-                System.Text.RegularExpressions.Regex.IsMatch(TextBoxLokalizacjaY.Text, "[^.,0-9]") ||
+                System.Text.RegularExpressions.Regex.IsMatch(TextBoxLokalizacjaX.Text, "[^0-9]") ||
+                System.Text.RegularExpressions.Regex.IsMatch(TextBoxLokalizacjaY.Text, "[^0-9]") ||
                 System.Text.RegularExpressions.Regex.IsMatch(TextBoxMocNadawcza.Text, "[^.,0-9]") ||
-                System.Text.RegularExpressions.Regex.IsMatch(TextBoxNumerKanalu.Text, "[^.,0-9]") ||
+                System.Text.RegularExpressions.Regex.IsMatch(TextBoxNumerKanalu.Text, "[^0-9]") ||
                 System.Text.RegularExpressions.Regex.IsMatch(TextBoxZyskAnteny.Text, "[^.,0-9]"))
             {
-                MessageBox.Show("Wprowadź poprawnie dane. Akceptowalne są tylko liczby(0-9) oraz znaki('.' i ',')");
+                MessageBox.Show("Wprowadź poprawnie dane. Akceptowalne są tylko liczby(0-9) w polach Lokalizacja(X,Y) i Numer kanału, w polach Moc nadawcza i Zysk anteny dodatkowo dostępne są znaki('.' i ',')");
             }
             else
             {
@@ -184,6 +185,5 @@ namespace WpfApp1
                 MessageBox.Show(msg);
             }
         }
-
     }
 }

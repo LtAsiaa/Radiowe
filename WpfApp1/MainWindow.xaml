@@ -11,20 +11,41 @@
             <ColumnDefinition Width="187*"/>
             <ColumnDefinition Width="613*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.ColumnSpan="2" Margin="35,33,449,215">
-            <Button Content="Button" HorizontalAlignment="Left" Margin="54,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.618,0.804" Click="Button_Click"/>
-            <Label Content="Dane użytkownika:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label Content="Moc nadawcza:" HorizontalAlignment="Left" Margin="30,49,0,0" VerticalAlignment="Top"/>
-            <Label Content="Lokalizacja:" HorizontalAlignment="Left" Margin="30,80,0,0" VerticalAlignment="Top"/>
-            <Label Content="Zysk anteny:" HorizontalAlignment="Left" Margin="30,111,0,0" VerticalAlignment="Top"/>
-            <Label Content="Numer kanału:" HorizontalAlignment="Left" Margin="30,142,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextBoxMocNadawcza" HorizontalAlignment="Left" Margin="126,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="TextBoxLokalizacjaX" HorizontalAlignment="Left" Margin="126,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="TextBoxZyskAnteny" HorizontalAlignment="Left" Margin="126,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="TextBoxNumerKanalu" HorizontalAlignment="Left" Margin="126,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="TextBoxLokalizacjaY" HorizontalAlignment="Left" Margin="280,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label Content="X:" HorizontalAlignment="Left" Margin="106,80,0,0" VerticalAlignment="Top"/>
-            <Label Content="Y:" HorizontalAlignment="Left" Margin="261,80,0,0" VerticalAlignment="Top"/>
+        <Grid Grid.ColumnSpan="2" Margin="25,24,245,224">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ButtonDodajUzytkownika" Content="Dodaj użytkownika" HorizontalAlignment="Left" Margin="90,193,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.618,0.804" Click="ButtonDodajUzytkownika_Click" Height="24
+                    " Width="117"/>
+            <Label Content="Dane użytkownika:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="109"/>
+            <Label Content="Moc nadawcza:" HorizontalAlignment="Left" Margin="15,59,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
+            <Label Content="Lokalizacja:" HorizontalAlignment="Left" Margin="15,88,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
+            <Label Content="Zysk anteny:" HorizontalAlignment="Left" Margin="15,117,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
+            <Label Content="Numer kanału:" HorizontalAlignment="Left" Margin="15,146,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
+            <TextBox x:Name="TextBoxMocNadawcza" HorizontalAlignment="Left" Margin="141,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" Height="24" RenderTransformOrigin="0.483,0.593"/>
+            <TextBox x:Name="TextBoxLokalizacjaX" HorizontalAlignment="Left" Margin="164,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="43" Height="24" RenderTransformOrigin="0.533,0.668"/>
+            <TextBox x:Name="TextBoxZyskAnteny" HorizontalAlignment="Left" Margin="141,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" Height="24"/>
+            <TextBox x:Name="TextBoxNumerKanalu" HorizontalAlignment="Left" Margin="141,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Height="24"/>
+            <TextBox x:Name="TextBoxLokalizacjaY" HorizontalAlignment="Left" Margin="231,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="43" Height="24"/>
+            <Label Content="X:" HorizontalAlignment="Left" Margin="144,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.559,0.474" Height="26" Width="20">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="1.762"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-0.266"/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label Content="Y:" HorizontalAlignment="Left" Margin="211,88,0,0" VerticalAlignment="Top" Height="24" Width="20" RenderTransformOrigin="0.5,0.654"/>
+            <TextBox x:Name="TextBoxTest" HorizontalAlignment="Left" Margin="235,194,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+            <ComboBox x:Name="ComboBoxM" HorizontalAlignment="Left" Margin="222,59,0,0" VerticalAlignment="Top" Width="52" Height="24" Loaded="ComboBoxM_Loaded"/>
+            <ComboBox x:Name="ComboBoxZ" HorizontalAlignment="Left" Margin="222,117,0,0" VerticalAlignment="Top" Width="52" Height="24" Loaded="ComboBoxZ_Loaded"/>
+            <ListBox x:Name="ListBoxUzytkownicy" Margin="365,16,0,0" SelectionChanged="ListBox_SelectionChanged" Height="168" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250"/>
+            <TextBox x:Name="TextBoxNazwaUzytkownika" HorizontalAlignment="Left" Margin="141,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Height="24"/>
+            <Label Content="Nzawa użytkownika:" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
+            <Button x:Name="ButtonUsunUzytkownika" Content="Usuń użytkownika" HorizontalAlignment="Left" Margin="515,193,0,0" VerticalAlignment="Top" Click="ButtonUsunUzytkownika_Click" Height="24" Width="100"/>
+            <Button x:Name="ButtonPokazDaneUzytkownika" Content="Pokaż dane użytkownika" HorizontalAlignment="Left" Margin="365,193,0,0" VerticalAlignment="Top" Height="24" Width="135" Click="ButtonPokazDaneUzytkownika_Click"/>
         </Grid>
     </Grid>
 </Window>

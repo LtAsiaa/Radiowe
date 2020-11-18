@@ -26,7 +26,7 @@ namespace Radiowe
         public double CalculateFSPL(double band)
         {
             //  FSPL_ = 32.44d + 20 * Math.Log10(the_distance_) + 20 * Math.Log10(band);
-            FSPL_ = 92.45d + 20 * Math.Log10(the_distance_/10) + 20 * Math.Log10((band/10)/1000); // distance w km, band w GHz
+            FSPL_ = 92.45d + 20 * Math.Log10(the_distance_/10) + 20 * Math.Log10(band/1000); // distance w km, band w GHz
             return FSPL_;
         }
         public double CalculateFSPL2(double band,double x)

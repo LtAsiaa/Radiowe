@@ -26,7 +26,17 @@ namespace Radiowe
                 }
             else
                 {
-                    Console.Write("_|");
+                    if ((snr_station_[0].Item1) > 70d)
+                    {
+                        //Console.Write("X|");
+                        Console.Write(Convert.ToInt32(snr_station_[0].Item1) + "|");
+                    }
+                    else
+                    {
+                        Console.Write("_|");
+                    }
+                        
+                    
                 }
 
              }
@@ -61,11 +71,12 @@ namespace Radiowe
         {
             snr_station_.Add(Tuple.Create(SNR, station));
         }
-
+        
 
         private BaseStation station_;
         private User user_;
         private List<Tuple<double, BaseStation>> snr_station_=new List<Tuple<double, BaseStation>>();
+        private double SNR_;
 
     }
 }

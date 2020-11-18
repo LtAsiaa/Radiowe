@@ -47,5 +47,13 @@ namespace Radiowe
         {
             return location_.Item2;
         }
+        public int GetPower()
+        {
+            return power_;
+        }
+        public int GetGain()
+        {
+            return antenna_gain_;
+        }
     }
 }

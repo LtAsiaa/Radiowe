@@ -14,8 +14,8 @@ namespace Radiowe
         public void AddNewPair(User user,BaseStation base_station)
         {
             user_station_in_system_.Add(Tuple.Create(user, base_station));
-            grid_.AddStationS(base_station.GetLocationX(), base_station.GetLocationY(), base_station);
-            grid_.AddUser(user.GetLocationX(), user.GetLocationY(), user);
+            grid_.AddStationAndUser(base_station.GetLocationX(), base_station.GetLocationY(), base_station, user.GetLocationX(), user.GetLocationY(), user);
+           // grid_.AddUser(user.GetLocationX(), user.GetLocationY(), user);
         }
         public void test()
         {

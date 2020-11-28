@@ -106,7 +106,7 @@ namespace Radiowe
         }
         public bool TryAddNewStation(int x, int y, BaseStation station)
         {
-            //last_+=5;
+            last_+=3;
             grid_temp_=new Cell[last_*2, last_*2];
             for (int i = 0; i < last_*2; i++)
             {
@@ -132,8 +132,13 @@ namespace Radiowe
                     double temp_2w = calculations_.CalculateFSPL(10); // podajemy w MHz
                     double temp_3w = calculations_.CalculateReceiverPower(station.GetPower(), station.GetGain(), 0); //0 - zysk anteny uzytkownika - gui musi dodać (GUI)
                     double temp_4w = calculations_.CalculateNoise(station.band_);//pasmo
+      
                     double SNRw = temp_3w - temp_4w;
-                    grid_[i, j].AddToList(SNRw, station);
+                    if (i == 12 && j == 12)
+                    {
+                        Console.WriteLine("SNR 12 12 " + SNRw);
+                    }
+                    grid_temp_[i, j].AddToList(SNRw, station);
                 }
             }
 
@@ -141,7 +146,7 @@ namespace Radiowe
             {
                 for (int j = 0; j < last_ * 2; j++)
                 {
-                    Console.WriteLine("i:" + i + "j" + j);
+                    //Console.WriteLine("i:" + i + "j" + j);
                     grid_temp_[i, j].Print(0);
                 }
                 Console.WriteLine("");

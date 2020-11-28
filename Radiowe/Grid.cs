@@ -106,6 +106,26 @@ namespace Radiowe
         }
         public bool TryAddNewStation(int x, int y, BaseStation station)
         {
+            if (first_)
+            {
+                grid_[x, y].AddStation(station);
+                for (int i = 0; i < 30; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                    {
+
+                        double temp_1w = calculations_.CalculateTheDistace(x, y, i, j);
+                        double temp_2w = calculations_.CalculateFSPL(10); // podajemy w MHz
+                        double temp_3w = calculations_.CalculateReceiverPower(station.GetPower(), station.GetGain(), 0); //0 - zysk anteny uzytkownika - gui musi dodać (GUI)
+                        double temp_4w = calculations_.CalculateNoise(station.band_);//pasmo
+                        double SNRw = temp_3w - temp_4w;
+                        grid_[i, j].AddToList(SNRw, station);
+                    }
+                }
+                first_ = false;
+                return true;
+            }
+            else { 
             last_+=3;
             grid_temp_=new Cell[last_*2, last_*2];
             for (int i = 0; i < last_*2; i++)
@@ -134,10 +154,6 @@ namespace Radiowe
                     double temp_4w = calculations_.CalculateNoise(station.band_);//pasmo
       
                     double SNRw = temp_3w - temp_4w;
-                    if (i == 12 && j == 12)
-                    {
-                        Console.WriteLine("SNR 12 12 " + SNRw);
-                    }
                     grid_temp_[i, j].AddToList(SNRw, station);
                 }
             }
@@ -153,6 +169,7 @@ namespace Radiowe
             }
 
             return false;
+            }
         }
        public int GetAmountBaseStation()
        {
@@ -162,6 +179,7 @@ namespace Radiowe
        {
            amount_of_base_stations_++;
        }
+        private bool first_ = true;
         private int leftBorder_;
         private int rightBorder_;
         private bool condition_;

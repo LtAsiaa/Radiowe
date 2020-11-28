@@ -7,7 +7,7 @@ using Radiowe.Interfaces;
 namespace Radiowe
 {
     class Cell: IPrint, ICellManagment
-    {
+    {// Id X Y 10x double liczba 10x Id_base_station 
         public Cell()
         {
 

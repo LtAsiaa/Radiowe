@@ -18,22 +18,29 @@ namespace Radiowe
             { 
             if(station_ !=null)
                 {
-                    Console.Write("S|");
+                    Console.Write("S |");
                 }
             else if (user_ !=null)
                 {
-                    Console.Write("U|");
+                    Console.Write("U |");
                 }
             else
                 {
-                    if ((snr_station_[0].Item1) > 70d)
+                    if ((snr_station_[0].Item1) > 6d)
                     {
                         //Console.Write("X|");
-                        Console.Write(Convert.ToInt32(snr_station_[0].Item1) + "|");
+                        if (Convert.ToInt32(snr_station_[0].Item1) < 10)
+                        {
+                            Console.Write("0"+Convert.ToInt32(snr_station_[0].Item1) + "|");
+                        }
+                        else
+                            { 
+                            Console.Write(Convert.ToInt32(snr_station_[0].Item1) + "|");
+                        }
                     }
                     else
                     {
-                        Console.Write("_|");
+                        Console.Write("__|");
                     }
                         
                     

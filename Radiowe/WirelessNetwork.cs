@@ -11,10 +11,11 @@ namespace Radiowe
             calculations_ = new Calculations();
             grid_ = new Grid();
         }
-        public void AddNewBaseStation(BaseStation base_station)
+        public bool AddNewBaseStation(BaseStation base_station)
         {
             base_station_system_.Add(base_station);
             grid_.AddBaseStation(base_station.GetLocationX(), base_station.GetLocationY(), base_station);
+            return grid_.TryAddNewStation(base_station.GetLocationX(), base_station.GetLocationY(), base_station);
         }
         public void test()
         {

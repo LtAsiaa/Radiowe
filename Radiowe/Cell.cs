@@ -12,9 +12,13 @@ namespace Radiowe
         {
 
         }
+        public Object Clone()
+        {
+            return MemberwiseClone();
+        }
         public void Print(int type)
         {
-            if(type == 0 )// wyświetlanie w siatce tylko S - stacja U - uzytkownik
+            if(type == 0 )// wyświetlanie w siatce tylko S - stacja
             { 
             if(station_ !=null)
                 {
@@ -22,9 +26,10 @@ namespace Radiowe
                 }
             else
                 {
-                    if ((snr_station_[0].Item1) > 6d)
+                    if (snr_station_.Count!=0 &&(snr_station_[0].Item1) > 6d)
                     {
-                        //Console.Write("X|");
+                        //Console.Write(snr_station_[0].Item1);
+                        //Console.WriteLine("SNR: " + snr_station_[0].Item1);
                         if (Convert.ToInt32(snr_station_[0].Item1) < 10)
                         {
                             Console.Write("0"+Convert.ToInt32(snr_station_[0].Item1) + "|");
@@ -65,7 +70,10 @@ namespace Radiowe
         {
             snr_station_.Add(Tuple.Create(SNR, station));
         }
-        
+        public BaseStation GetBaseStation()
+        {
+            return station_;
+        }
 
         private BaseStation station_;
         private List<Tuple<double, BaseStation>> snr_station_=new List<Tuple<double, BaseStation>>();

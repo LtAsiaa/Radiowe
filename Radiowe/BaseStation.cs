@@ -6,38 +6,23 @@ namespace Radiowe
 {
     public class BaseStation: ILocationManagment
     {
-        private Tuple<int, int> location_;
-        private int antenna_gain_;
-        private int power_;
-        private User[] channels_;
-        private double band_;
-        private double channel_band_;
-        public BaseStation(int x, int y, int antenna_gain, int power, int number_of_channels = 10, double band = 100)
+        public BaseStation(int x, int y, int antenna_gain, int power, int number_of_channel , double band = 10000000)
         {
             location_ = new Tuple<int, int>(x, y);
             antenna_gain_ = antenna_gain;
             power_ = power;
-            channels_ = new User[number_of_channels];
             band_ = band;
-            try
-            {
-                if (number_of_channels == 0)
-                {
-                    throw new System.DivideByZeroException();
-                }
-                else
-                {
-                    channel_band_ = band / number_of_channels;
-                }
-            }
-            catch (DivideByZeroException e)
-            {
-                //obsługa wyjątku 
-            }
+            channel_ = number_of_channel;
         }
-        public void AddUserToChannel(int number_of_channel_, User user)
+        public double band_
         {
-            channels_[number_of_channel_] = user;
+            get;
+            private set;
+        }
+        public double channel_
+        {
+            get;
+            private set;
         }
         public int GetLocationX()
         {
@@ -55,5 +40,8 @@ namespace Radiowe
         {
             return antenna_gain_;
         }
+        private Tuple<int, int> location_;
+        private int antenna_gain_;
+        private int power_;
     }
 }

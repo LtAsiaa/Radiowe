@@ -11,11 +11,10 @@ namespace Radiowe
             calculations_ = new Calculations();
             grid_ = new Grid();
         }
-        public void AddNewPair(User user,BaseStation base_station)
+        public void AddNewBaseStation(BaseStation base_station)
         {
-            user_station_in_system_.Add(Tuple.Create(user, base_station));
-            grid_.AddStationAndUser(base_station.GetLocationX(), base_station.GetLocationY(), base_station, user.GetLocationX(), user.GetLocationY(), user);
-           // grid_.AddUser(user.GetLocationX(), user.GetLocationY(), user);
+            base_station_system_.Add(base_station);
+            grid_.AddBaseStation(base_station.GetLocationX(), base_station.GetLocationY(), base_station);
         }
         public void test()
         {
@@ -33,8 +32,7 @@ namespace Radiowe
             Console.WriteLine(SNR);
         }
 
-
-        private List<Tuple<User, BaseStation>> user_station_in_system_ = new List<Tuple<User, BaseStation>>();
+        private List<BaseStation> base_station_system_ = new List< BaseStation>();
         private Calculations calculations_;
         private Grid grid_;
 

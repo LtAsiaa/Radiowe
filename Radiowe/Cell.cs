@@ -20,10 +20,6 @@ namespace Radiowe
                 {
                     Console.Write("S |");
                 }
-            else if (user_ !=null)
-                {
-                    Console.Write("U |");
-                }
             else
                 {
                     if ((snr_station_[0].Item1) > 6d)
@@ -54,19 +50,10 @@ namespace Radiowe
            
         }
 
-        public void AddUser(User user)
-        {
-            user_ = user;
-        }
 
         public void AddStation(BaseStation station)
         {
             station_ = station;
-        }
-
-        public void DeleteUser()
-        {
-            user_ = null;
         }
 
         public void DeleteStation()
@@ -81,7 +68,6 @@ namespace Radiowe
         
 
         private BaseStation station_;
-        private User user_;
         private List<Tuple<double, BaseStation>> snr_station_=new List<Tuple<double, BaseStation>>();
         private double SNR_;
 

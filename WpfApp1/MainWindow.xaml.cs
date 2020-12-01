@@ -22,7 +22,7 @@ namespace WpfApp1
     {
         BaseStation Base = null;
         User user = null;
-
+        Controller controller = new Controller();
         List<PlaceholderInfoClass> InfoList = new List<PlaceholderInfoClass>();
 
         public MainWindow()
@@ -96,12 +96,19 @@ namespace WpfApp1
                 }
                 //TextBoxTest.Text = f.ToString();
                 ListBoxUzytkownicy.Items.Add(TextBoxNazwaUzytkownika.Text);
-                InfoList.Add(new PlaceholderInfoClass(TextBoxNazwaUzytkownika.Text,
+                /*InfoList.Add(new PlaceholderInfoClass(TextBoxNazwaUzytkownika.Text,
                     int.Parse(TextBoxLokalizacjaX.Text),
                     int.Parse(TextBoxLokalizacjaY.Text),
                     _mocNadawcza,
                     _zyskAnteny,
-                    int.Parse(TextBoxNumerKanalu.Text)));
+                    int.Parse(TextBoxNumerKanalu.Text)));*/
+                controller.GetRecord(new PlaceholderInfoClass(TextBoxNazwaUzytkownika.Text,
+                int.Parse(TextBoxLokalizacjaX.Text),
+                int.Parse(TextBoxLokalizacjaY.Text),
+                _mocNadawcza,
+                _zyskAnteny,
+                int.Parse(TextBoxNumerKanalu.Text)));
+                InfoList.Add(controller.RetRecord());
             }
 
 

@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\Controller.cs" />
     <Compile Include="DataBase\DataBase.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -73,9 +74,7 @@
     <Compile Include="Obliczenia\BaseStation.cs" />
     <Compile Include="Obliczenia\Calculations.cs" />
     <Compile Include="Obliczenia\User.cs" />
-
     <Compile Include="PlaceholderInfoClass.cs" />
-
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

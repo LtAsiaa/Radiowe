@@ -15,6 +15,7 @@ namespace Radiowe
                 for(int j=0;j<kSize;j++)
                 {
                     grid_[i,j] = new Cell();
+                    grid_[i, j].InitializeCell();
                 }
             }
 
@@ -31,22 +32,63 @@ namespace Radiowe
                 Console.WriteLine(" ");
             }
         }
-        public void AddBaseStation(int x,int y, BaseStation station)
+        public void AddFirstBaseStation(BaseStation station) // starczy przesyłanie samego base station
         {
-            double SNR = 10;
-            leftBorder_ = 0;
-            rightBorder_ = 1000;
+
+            double SNR;
+            int channel = station.channel_;
+           // leftBorder_ = 0;
+           // rightBorder_ = 1000;
+
+            // SPRAWDZANIE CZY STACJA MA WYSTARCZAJĄCĄ MOC
             double temp_1 = calculations_.CalculateTheDistace(0, 0, 1, 0);
-            double temp_2 = calculations_.CalculateFSPL(10); // podajemy w MHz
-            double temp_3 = calculations_.CalculateReceiverPower(station.GetPower(), station.GetGain(), 0); //0 - zysk anteny uzytkownika - gui musi dodać (GUI)
+            double temp_2 = calculations_.CalculateFSPL(2.4); 
+            double temp_3 = calculations_.CalculateReceiverPower(station.GetPower(), station.GetGain(), station.antenna_gain_receiver_); //0 - zysk anteny uzytkownika - gui musi dodać (GUI)
             double temp_4 = calculations_.CalculateNoise(station.band_);//pasmo
-            SNR = temp_3 - temp_4;
+            SNR = calculations_.CalculateSNR_Receiver();
             if (SNR<6)
             {
                 Console.WriteLine("złe dane - użytkownik dostaje informację, że nie może zostać wpuszczony do systemu");
                 return;
                 
             }
+            //first_ = true;
+
+
+            // DODAWANIE PIERWSZEJ STACJI DO SYSTEMU // tutaj raczej nie będzie sprawdzania first (to będzie w wireless network)
+            if (first_)
+            {
+               // grid_[x, y].AddStation(station);
+                for (int i = 0; i < 30; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                    {
+                        double temp_1w = calculations_.CalculateTheDistace(station.GetLocationX(), station.GetLocationY(), i, j);
+                        double temp_2w = calculations_.CalculateFSPL(2.4);
+                        double temp_3w = calculations_.CalculateReceiverPower(station.GetPower(), station.GetGain(), station.antenna_gain_receiver_); //0 - zysk anteny uzytkownika - gui musi dodać (GUI)
+                        double temp_4w = calculations_.CalculateNoise(station.band_);//pasmo
+                        double SNRw = calculations_.CalculateSNR_Receiver();
+                        if (i == station.GetLocationX() && j == station.GetLocationY())
+                        {
+                            grid_[i, j].AddToList2(station.name_, -1, -1, station.channel_);
+                        }
+                        else
+                        grid_[i, j].AddToList2(station.name_,SNRw,SNRw,station.channel_);
+                        
+                    }
+                }
+                first_ = false;
+                for (int i = 0; i < 30; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                    {
+                        grid_[i, j].Print2(0);
+                    }
+                    Console.WriteLine("");
+                }
+
+            }
+            /*
             while (!(SNR >= 6 && SNR <= 8))
             {
                 last_ = leftBorder_ + (rightBorder_ - leftBorder_) / 2;
@@ -67,6 +109,9 @@ namespace Radiowe
                 }
                 Console.WriteLine("leftBorder: " + leftBorder_ + "rightBorder:" + rightBorder_);
             }
+            */
+
+            /*
             condition_ = true;
                 while(condition_)
                 {
@@ -102,8 +147,11 @@ namespace Radiowe
                         }
                     }
                 }
-                            
+                */
+
         }
+
+        /*
         public bool TryAddNewStation(int x, int y, BaseStation station)
         {
             if (first_)
@@ -115,7 +163,7 @@ namespace Radiowe
                     {
 
                         double temp_1w = calculations_.CalculateTheDistace(x, y, i, j);
-                        double temp_2w = calculations_.CalculateFSPL(10); // podajemy w MHz
+                        double temp_2w = calculations_.CalculateFSPL(2.4);
                         double temp_3w = calculations_.CalculateReceiverPower(station.GetPower(), station.GetGain(), 0); //0 - zysk anteny uzytkownika - gui musi dodać (GUI)
                         double temp_4w = calculations_.CalculateNoise(station.band_);//pasmo
                         double SNRw = temp_3w - temp_4w;
@@ -125,7 +173,12 @@ namespace Radiowe
                 first_ = false;
                 return true;
             }
-            else { 
+            else
+            {
+
+                return false; 
+            }
+            
             last_+=3;
             grid_temp_=new Cell[last_*2, last_*2];
             for (int i = 0; i < last_*2; i++)
@@ -170,7 +223,60 @@ namespace Radiowe
 
             return false;
             }
+            
         }
+        */
+
+       public void AddMoreBaseStation(BaseStation station_in_sys, BaseStation station_new)  //  nowa funkcja na dodawanie kolejnych stacji
+        {
+           
+
+           // dodawanie temp macierzy
+            grid_temp_ = new Cell[kSize, kSize];
+            for (int i = 0; i < 30; i++)
+            {
+                for (int j = 0; j < 30; j++)
+                {
+                    grid_temp_[i, j] = (Cell)grid_[i, j].Clone();
+                }
+            }
+
+
+            for (int i = 0; i < 30; i++)
+            {
+                for (int j = 0; j < 30; j++)
+                {
+                    if (grid_[i,j].GetSINR(station_in_sys.channel_) > 6)
+                    {
+                        double temp_1w = calculations_.CalculateTheDistace(station_in_sys.GetLocationX(), station_in_sys.GetLocationY(), i, j);
+                        double temp_11w = calculations_.CalculateTheDistace2(station_new.GetLocationX(), station_new.GetLocationY(), i, j);
+                        double temp_2w = calculations_.CalculateFSPL(2.4);
+                        double temp_22w = calculations_.CalculateFSPL2(2.4);
+                        double temp_3w = calculations_.CalculateReceiverPower(station_in_sys.GetPower(), station_in_sys.GetGain(), station_in_sys.antenna_gain_receiver_);
+                        double temp_4w = calculations_.CalculateI_(station_new.GetPower(), station_new.GetGain(), station_in_sys.antenna_gain_receiver_);
+                        double temp_5w = calculations_.CalculateNoise(station_in_sys.band_);//pasmo
+                        double channel_diff = Math.Abs(station_in_sys.channel_ - station_new.channel_);
+                        double temp_6w = calculations_.CalculateSINR(channel_diff); // tu juz wychodzi nowa wartość SINR'u 
+                        double newSinr = calculations_.ToReplaceSINR(grid_[i, j].GetSINR(station_in_sys.channel_), temp_6w); // roznica miedzy stara a nowa wartoscia
+                        // tutaj trzeba zupdatować sinr (stara wartosc - roznica) - nie mozna bezposrednio wklejac nowej wartosci - przy dodawaniu kolejnych stacji to wazne
+                        // to do 
+                        // jak prosto updatowć tuple w liście?
+                       
+
+                    }
+                    
+                    
+                    //double temp_3w = calculations_.CalculateReceiverPower(station.GetPower(), station.GetGain(), 0); //0 - zysk anteny uzytkownika - gui musi dodać (GUI)
+                    //double temp_4w = calculations_.CalculateNoise(station.band_);//pasmo
+                    //double SNRw = calculations_.CalculateSNR_Receiver();
+                    
+                }
+            }
+
+                Console.WriteLine("tutaj");
+            
+        }
+
        public int GetAmountBaseStation()
        {
            return amount_of_base_stations_;

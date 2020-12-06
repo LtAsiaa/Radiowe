@@ -6,20 +6,34 @@ namespace Radiowe
 {
     public class BaseStation: ILocationManagment
     {
-        public BaseStation(int x, int y, int antenna_gain, int power, int number_of_channel , double band = 10000000)
+        public BaseStation(int x, int y, double antenna_gain, double power, int number_of_channel , double antenna_gain_receiver, string name , double band = 10000000)
         {
             location_ = new Tuple<int, int>(x, y);
             antenna_gain_ = antenna_gain;
             power_ = power;
             band_ = band;
             channel_ = number_of_channel;
+            antenna_gain_receiver_ = antenna_gain_receiver;
+            name_ = name;
+        }
+
+        public string name_
+        {
+            get;
+            private set;
+        }
+
+        public double antenna_gain_receiver_
+        {
+            get;
+            private set;
         }
         public double band_
         {
             get;
             private set;
         }
-        public double channel_
+        public int channel_
         {
             get;
             private set;
@@ -32,16 +46,16 @@ namespace Radiowe
         {
             return location_.Item2;
         }
-        public int GetPower()
+        public double GetPower()
         {
             return power_;
         }
-        public int GetGain()
+        public double GetGain()
         {
             return antenna_gain_;
         }
         private Tuple<int, int> location_;
-        private int antenna_gain_;
-        private int power_;
+        private double antenna_gain_;
+        private double power_;
     }
 }

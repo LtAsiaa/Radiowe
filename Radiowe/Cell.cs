@@ -6,7 +6,7 @@ using Radiowe.Interfaces;
 
 namespace Radiowe
 {
-    class Cell: IPrint, ICellManagment
+    class Cell : IPrint, ICellManagment
     {// Id X Y 10x double liczba 10x Id_base_station 
         public Cell()
         {
@@ -18,24 +18,24 @@ namespace Radiowe
         }
         public void Print(int type)
         {
-            if(type == 0 )// wyświetlanie w siatce tylko S - stacja
-            { 
-            if(station_ !=null)
+            if (type == 0)// wyświetlanie w siatce tylko S - stacja
+            {
+                if (station_ != null)
                 {
                     Console.Write("S |");
                 }
-            else
+                else
                 {
-                    if (snr_station_.Count!=0 &&(snr_station_[0].Item1) > 6d)
+                    if (snr_station_.Count != 0 && (snr_station_[0].Item1) > 6d)
                     {
                         //Console.Write(snr_station_[0].Item1);
                         //Console.WriteLine("SNR: " + snr_station_[0].Item1);
                         if (Convert.ToInt32(snr_station_[0].Item1) < 10)
                         {
-                            Console.Write("0"+Convert.ToInt32(snr_station_[0].Item1) + "|");
+                            Console.Write("0" + Convert.ToInt32(snr_station_[0].Item1) + "|");
                         }
                         else
-                            { 
+                        {
                             Console.Write(Convert.ToInt32(snr_station_[0].Item1) + "|");
                         }
                     }
@@ -43,16 +43,16 @@ namespace Radiowe
                     {
                         Console.Write("__|");
                     }
-                        
-                    
+
+
                 }
 
-             }
+            }
             else // wyświetlanie S U i SNR
             {
 
             }
-           
+
         }
 
 
@@ -62,7 +62,7 @@ namespace Radiowe
             {
                 if (station_ != null)
                 {
-                   // Console.Write("S |");
+                    //Console.Write("X |");
                 }
                 else
                 {
@@ -79,21 +79,27 @@ namespace Radiowe
                             Console.Write(Convert.ToInt32(cell_info_[0].Item2) + "|");
                         }
                     }
+                    else if (cell_info_.Count != 0 && (cell_info_[1].Item2) > 6d)
+                    {
+                        if (Convert.ToInt32(cell_info_[1].Item2) < 10)
+                        {
+                            Console.Write("0" + Convert.ToInt32(cell_info_[1].Item2) + "*");
+                        }
+                        else
+                        {
+                            Console.Write(Convert.ToInt32(cell_info_[1].Item2) + "*");
+                        }
+                    }
                     else
                     {
                         Console.Write("__|");
+
                     }
-
-
                 }
-
             }
-            else // wyświetlanie S U i SNR
-            {
-
-            }
-
         }
+    
+
 
 
         public void AddStation(BaseStation station)
@@ -115,10 +121,28 @@ namespace Radiowe
         {
             cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
         }
+        public void EditList(string BaseName, double SNR, double SINR, int channel)
+        {
+            cell_info_.Remove(cell_info_[channel - 1]);
+            //cell_info_.this.AddToList2(BaseName)
+            cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
+        }
+        public double GetSnr(int channel)
+        {
+            return cell_info_[channel - 1].Item2;
+        }
+        public void PrintList() //można wyrzucic w przyszłości
+        {
+            foreach(var tuple in cell_info_)
+            {
+                Console.WriteLine(tuple.Item1+ " "+tuple.Item2+" "+ tuple.Item3);
+            }
+        }
         public BaseStation GetBaseStation()
         {
             return station_;
         }
+
 
         private BaseStation station_;
         private List<Tuple<double, BaseStation>> snr_station_=new List<Tuple<double, BaseStation>>();

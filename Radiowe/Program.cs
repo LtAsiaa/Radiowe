@@ -8,17 +8,17 @@ namespace Radiowe
         {
             var network = new WirelessNetwork();
 
+     
+            network.AddStationToSystem(new BaseStation(10, 10, 10, 5, 1,0, "pierwsza"));
 
-            network.AddNewBaseStation(new BaseStation(10, 10, 20, 5, 1,0, "pierwsza"));
+            network.AddStationToSystem(new BaseStation(15, 15, 10, 1, 1, 0, "druga"));
+            network.AddStationToSystem(new BaseStation(5, 5, 10, 1, 2, 0, "trzecią"));
+            //Console.WriteLine("Uzytkownik moze zostac dodany do systemu");
 
-            network.Add2(new BaseStation(20, 20, 25, 5, 2, 0, "druga"));
-            
-                //Console.WriteLine("Uzytkownik moze zostac dodany do systemu");
-            
-            
-            
-                //Console.WriteLine("Uzytkownik NIE moze zostac dodany do systemu");
-            
+
+
+            //Console.WriteLine("Uzytkownik NIE moze zostac dodany do systemu");
+
             /*
             if (network.AddNewBaseStation(new BaseStation(15, 15, -20, -1, 1)))
             {

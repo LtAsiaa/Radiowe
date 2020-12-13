@@ -98,7 +98,99 @@ namespace Radiowe
                 }
             }
         }
-    
+        public void PrintTest()
+        {
+
+            if (station_ != null)
+            {
+                //Console.Write("X |");
+            }
+            else
+            {
+                if (cell_info_.Count != 0 && (cell_info_[0].Item2) > 0d)
+                {
+                    //Console.Write(snr_station_[0].Item1);
+                    //Console.WriteLine("SNR: " + snr_station_[0].Item1);
+                    if (Convert.ToInt32(cell_info_[0].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[0].Item2) + "!");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[0].Item2) + "!");
+                    }
+                }
+                else if (cell_info_.Count != 0 && (cell_info_[1].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[1].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[1].Item2) + "@");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[1].Item2) + "@");
+                    }
+                }
+                else if (cell_info_.Count != 0 && (cell_info_[2].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[2].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[2].Item2) + "#");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[2].Item2) + "#");
+                    }
+                }
+                else if (cell_info_.Count != 0 && (cell_info_[3].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[3].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[3].Item2) + "$");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[3].Item2) + "$");
+                    }
+                }
+
+
+                else if (cell_info_.Count != 0 && (cell_info_[4].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[4].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[4].Item2) + "%");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[4].Item2) + "%");
+                    }
+                }
+
+
+
+                else if (cell_info_.Count != 0 && (cell_info_[5].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[5].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[5].Item2) + "^");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[5].Item2) + "^");
+                    }
+                }
+                else
+                {
+                    Console.Write("__|");
+
+                }
+
+            }
+        }
+                
+            
+        
 
 
 
@@ -121,11 +213,37 @@ namespace Radiowe
         {
             cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
         }
-        public void EditList(string BaseName, double SNR, double SINR, int channel)
+        public void EditList2(string BaseName, double SNR, double SINR, int channel)
         {
             cell_info_.Remove(cell_info_[channel - 1]);
+            Console.WriteLine("edytuje : " + (channel - 1));
             //cell_info_.this.AddToList2(BaseName)
             cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
+            for(int i=0;i<cell_info_.Count;i++)
+            {
+                if(cell_info_[i].Item1==BaseName)
+                {
+                    Console.WriteLine("dodałem na : " + i + " nazwa "+ cell_info_[i].Item1);
+                }
+                
+            }
+            
+        }
+        public void EditList(string BaseName, double SNR, double SINR, int channel)
+        {
+            cell_info_[channel - 1]=new Tuple<string, double, double>(BaseName, SNR, SINR);
+            Console.WriteLine("edytuje : " + (channel - 1));
+            //cell_info_.this.AddToList2(BaseName)
+            //cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
+            for (int i = 0; i < cell_info_.Count; i++)
+            {
+                if (cell_info_[i].Item1 == BaseName)
+                {
+                    Console.WriteLine("dodałem na : " + i + " nazwa " + cell_info_[i].Item1);
+                }
+
+            }
+
         }
         public double GetSnr(int channel)
         {

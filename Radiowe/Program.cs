@@ -9,10 +9,13 @@ namespace Radiowe
             var network = new WirelessNetwork();
 
      
-            network.AddStationToSystem(new BaseStation(10, 10, 10, 5, 1,0, "pierwsza"));
-
-            network.AddStationToSystem(new BaseStation(15, 15, 10, 1, 1, 0, "druga"));
-            network.AddStationToSystem(new BaseStation(5, 5, 10, 1, 2, 0, "trzecią"));
+            network.AddStationToSystem(new BaseStation(4, 4, 0,10, 1,0, "pierwsza"));
+            network.AddStationToSystem(new BaseStation(4, 4, 0, 10, 1, 0, "pierwszaipol"));
+            network.AddStationToSystem(new BaseStation(20, 20, 10, 1, 2, 0, "druga"));
+           //network.AddStationToSystem(new BaseStation(10, 20, 10, 1, 1, 0, "trzecia"));
+            //network.AddStationToSystem(new BaseStation(20, 5, 5, 3, 3, 0, "czwarta"));
+            //int x, int y, double antenna_gain, double power, int number_of_channel , double antenna_gain_receiver, string name , double band = 10000000
+            //network.AddStationToSystem(new BaseStation(5, 5, 10, 1, 2, 0, "trzecią"));
             //Console.WriteLine("Uzytkownik moze zostac dodany do systemu");
 
 

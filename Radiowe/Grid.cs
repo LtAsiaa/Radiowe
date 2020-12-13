@@ -64,7 +64,7 @@ namespace Radiowe
                         }
                         else
                         grid_[i, j].AddToList2(station.name_,SNRw,SNRw,station.channel_);
-                        
+                        //Console.WriteLine("i: " + i + " j: " + j + " SNR " + SNRw);
                     }
                 }
                 first_ = false;
@@ -72,7 +72,7 @@ namespace Radiowe
                 {
                     for (int j = 0; j < kSize; j++)
                     {
-                        grid_[i, j].Print2(0);
+                        grid_[i, j].PrintTest();
                     }
                     Console.WriteLine("");
                 }
@@ -88,6 +88,7 @@ namespace Radiowe
             if (CheckUserParameter(station_new) == false) return;
             // dodawanie temp macierzy
             grid_temp_ = new Cell[kSize, kSize];
+            Console.WriteLine("Print temp:");
             for (int i = 0; i < kSize; i++)
             {
                 for (int j = 0; j < kSize; j++)
@@ -95,7 +96,14 @@ namespace Radiowe
                     grid_temp_[i, j] = (Cell)grid_[i, j].Clone();
                 }
             }
-
+            for (int i = 0; i < kSize; i++)
+            {
+                for (int j = 0; j < kSize; j++)
+                {
+                    grid_temp_[i, j].PrintTest();
+                }
+                Console.WriteLine();
+            }
 
             for (int i = 0; i < kSize; i++)
             {
@@ -117,11 +125,12 @@ namespace Radiowe
                         double diff = calculations_.ToReplaceSINR(grid_[i, j].GetSINR(station_in_sys.channel_), newSinr); 
                         if(diff>=6)
                         {
+                            Console.WriteLine("edytycja listy pierwsza pętla");
                             grid_temp_[i, j].EditList(station_in_sys.name_, grid_temp_[i, j].GetSnr(station_in_sys.channel_), diff, station_in_sys.channel_);
                         }
                         else
                         {
-                            Console.WriteLine("Interferencja destruktywna jest zbyt duża - stacja nie może zostać dodana do systemu");
+                            Console.WriteLine("Interferencja destruktywna jest zbyt duża - stacja nie może zostać dodana do systemu 1 petla");
                             return;
                         }
                         
@@ -174,11 +183,12 @@ namespace Radiowe
                         double diff = calculations_.ToReplaceSINR(grid_temp_[i, j].GetSINR(station_new.channel_), newSinr);
                         if (diff >= 6)
                         {
+                            Console.WriteLine("edytycja listy druga pętla");
                             grid_temp_[i, j].EditList(station_new.name_, grid_temp_[i, j].GetSnr(station_new.channel_), diff, station_new.channel_);
                         }
                         else
                         {
-                            Console.WriteLine("Interferencja destruktywna jest zbyt duża - stacja nie może zostać dodana do systemu");
+                            Console.WriteLine("Interferencja destruktywna jest zbyt duża - stacja nie może zostać dodana do systemu 2petla");
                             return;
                         }
 
@@ -204,11 +214,21 @@ namespace Radiowe
 
             Console.WriteLine("Użytkownik może zostać dodany do systemu");
             //zapisz kopie jako orginał
+            grid_ = grid_temp_;
             for (int x = 0; x < kSize; x++)
             {
                 for (int z = 0; z < kSize; z++)
                 {
-                    grid_temp_[x, z].Print2(0);
+                    grid_temp_[x, z].PrintTest();
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("orginał");
+            for (int x = 0; x < kSize; x++)
+            {
+                for (int z = 0; z < kSize; z++)
+                {
+                    grid_[x, z].PrintTest();
                 }
                 Console.WriteLine();
             }

@@ -12,12 +12,13 @@ namespace Radiowe
         {
 
         }
-        public Cell(Cell cell) //konstruktor kopjujący
+        public Cell(Cell cell) //konstruktor kopiujący
         {
             this.station_ = cell.station_;
             this.InitializeCell();
             for (int i = 1; i < cell.cell_info_.Count; i++)
             {
+                //Console.WriteLine("I " + i);
                 this.EditList(cell.cell_info_[i-1].Item1, cell.cell_info_[i-1].Item2, cell.cell_info_[i-1].Item3, i);
             }
             for (int i = 0; i < cell.snr_station_.Count; i++)
@@ -25,22 +26,7 @@ namespace Radiowe
                 this.AddToList(cell.snr_station_[i].Item1, cell.snr_station_[i].Item2);
             }
         }
-        public Cell Clone()
-        {
-            Cell other = (Cell)this.MemberwiseClone();
-            other.AddStation(station_);
-            for(int i=0;i<cell_info_.Count;i++)
-            {
-                other.AddToList2Copy(this.cell_info_[i].Item1, this.cell_info_[i].Item2, this.cell_info_[i].Item3,i);
-            }
-            for (int i = 0; i < snr_station_.Count; i++)
-            {
-                other.AddToList(this.snr_station_[i].Item1, this.snr_station_[i].Item2);
-            }
-            //AddToList(double SNR, BaseStation station)
-            //other.snr_station_ = this.snr_station_;
-            return other;
-        }
+       
         public void Print(int type)
         {
             if (type == 0)// wyświetlanie w siatce tylko S - stacja
@@ -242,24 +228,9 @@ namespace Radiowe
         {
             cell_info_.Insert(channel, Tuple.Create(BaseName, SNR, SINR));
         }
-        public void EditList2(string BaseName, double SNR, double SINR, int channel)// tego nie korzystamy używamy Edit List
-        {
-            cell_info_.Remove(cell_info_[channel - 1]);
-            Console.WriteLine("edytuje : " + (channel - 1));
-            //cell_info_.this.AddToList2(BaseName)
-            cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
-            for(int i=0;i<cell_info_.Count;i++)
-            {
-                if(cell_info_[i].Item1==BaseName)
-                {
-                    Console.WriteLine("dodałem na : " + i + " nazwa "+ cell_info_[i].Item1);
-                }
-                
-            }
-            
-        }
         public void EditList(string BaseName, double SNR, double SINR, int channel)
         {
+            //Console.WriteLine("kanal: " + channel);
             cell_info_[channel - 1]=new Tuple<string, double, double>(BaseName, SNR, SINR);
             //Console.WriteLine("edytuje : " + (channel - 1));
             //cell_info_.this.AddToList2(BaseName)
@@ -278,13 +249,7 @@ namespace Radiowe
         {
             return cell_info_[channel - 1].Item2;
         }
-        public void PrintList() //można wyrzucic w przyszłości
-        {
-            foreach(var tuple in cell_info_)
-            {
-                Console.WriteLine(tuple.Item1+ " "+tuple.Item2+" "+ tuple.Item3);
-            }
-        }
+
         public BaseStation GetBaseStation()
         {
             return station_;

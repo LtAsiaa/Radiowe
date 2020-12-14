@@ -177,11 +177,11 @@ namespace Radiowe
                     if (i == station_new.GetLocationX() && j == station_new.GetLocationY())
                     {
                         //grid_temp_[i, j].AddToList2(station_new.name_, -1, -1, station_new.channel_);
-                        grid_temp_[i, j].EditList(station_new.name_, -1, -1, station_new.channel_);
+                        grid_temp_[i, j].AddToList2(station_new.name_, -1, -1, station_new.channel_);
                     }
                     else
                         //grid_temp_[i, j].AddToList2(station_new.name_, SNRw, SNRw, station_new.channel_);
-                        grid_temp_[i, j].EditList(station_new.name_, SNRw, SNRw, station_new.channel_);
+                        grid_temp_[i, j].AddToList2(station_new.name_, SNRw, SNRw, station_new.channel_);
                 }
             }
             for (int i = 0; i < kSize; i++)

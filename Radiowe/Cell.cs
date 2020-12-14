@@ -12,9 +12,34 @@ namespace Radiowe
         {
 
         }
-        public Object Clone()
+        public Cell(Cell cell) //konstruktor kopjujący
         {
-            return MemberwiseClone();
+            this.station_ = cell.station_;
+            this.InitializeCell();
+            for (int i = 1; i < cell.cell_info_.Count; i++)
+            {
+                this.EditList(cell.cell_info_[i-1].Item1, cell.cell_info_[i-1].Item2, cell.cell_info_[i-1].Item3, i);
+            }
+            for (int i = 0; i < cell.snr_station_.Count; i++)
+            {
+                this.AddToList(cell.snr_station_[i].Item1, cell.snr_station_[i].Item2);
+            }
+        }
+        public Cell Clone()
+        {
+            Cell other = (Cell)this.MemberwiseClone();
+            other.AddStation(station_);
+            for(int i=0;i<cell_info_.Count;i++)
+            {
+                other.AddToList2Copy(this.cell_info_[i].Item1, this.cell_info_[i].Item2, this.cell_info_[i].Item3,i);
+            }
+            for (int i = 0; i < snr_station_.Count; i++)
+            {
+                other.AddToList(this.snr_station_[i].Item1, this.snr_station_[i].Item2);
+            }
+            //AddToList(double SNR, BaseStation station)
+            //other.snr_station_ = this.snr_station_;
+            return other;
         }
         public void Print(int type)
         {
@@ -198,7 +223,7 @@ namespace Radiowe
         {
             station_ = station;
         }
-
+        
         public void DeleteStation()
         {
             station_ = null;
@@ -213,7 +238,11 @@ namespace Radiowe
         {
             cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
         }
-        public void EditList2(string BaseName, double SNR, double SINR, int channel)
+        public void AddToList2Copy(string BaseName, double SNR, double SINR, int channel)
+        {
+            cell_info_.Insert(channel, Tuple.Create(BaseName, SNR, SINR));
+        }
+        public void EditList2(string BaseName, double SNR, double SINR, int channel)// tego nie korzystamy używamy Edit List
         {
             cell_info_.Remove(cell_info_[channel - 1]);
             Console.WriteLine("edytuje : " + (channel - 1));
@@ -232,14 +261,14 @@ namespace Radiowe
         public void EditList(string BaseName, double SNR, double SINR, int channel)
         {
             cell_info_[channel - 1]=new Tuple<string, double, double>(BaseName, SNR, SINR);
-            Console.WriteLine("edytuje : " + (channel - 1));
+            //Console.WriteLine("edytuje : " + (channel - 1));
             //cell_info_.this.AddToList2(BaseName)
             //cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
             for (int i = 0; i < cell_info_.Count; i++)
             {
                 if (cell_info_[i].Item1 == BaseName)
                 {
-                    Console.WriteLine("dodałem na : " + i + " nazwa " + cell_info_[i].Item1);
+                    //Console.WriteLine("dodałem na : " + i + " nazwa " + cell_info_[i].Item1);
                 }
 
             }

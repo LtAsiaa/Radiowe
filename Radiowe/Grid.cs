@@ -82,35 +82,51 @@ namespace Radiowe
         }
 
 
-       public void AddMoreBaseStation(BaseStation station_in_sys, BaseStation station_new)  //  nowa funkcja na dodawanie kolejnych stacji
+       public bool AddMoreBaseStation(BaseStation station_in_sys, BaseStation station_new, int count)  //  nowa funkcja na dodawanie kolejnych stacji
         {
-
-            if (CheckUserParameter(station_new) == false) return;
+            
+            if (CheckUserParameter(station_new) == false) return false;
             // dodawanie temp macierzy
-            grid_temp_ = new Cell[kSize, kSize];
-            Console.WriteLine("Print temp:");
-            for (int i = 0; i < kSize; i++)
+            
+           
+            if(count2 == 0) {
+                Console.WriteLine("KOPIUJEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE:");
+                grid_temp_ = new Cell[kSize, kSize];
+                for (int i = 0; i < kSize; i++)
             {
                 for (int j = 0; j < kSize; j++)
                 {
-                    grid_temp_[i, j] = (Cell)grid_[i, j].Clone();
+                    grid_temp_[i, j] = new Cell(grid_[i, j]) ;
                 }
             }
-            for (int i = 0; i < kSize; i++)
+                Console.WriteLine("Print temp kopia:");
+                for (int i = 0; i < kSize; i++)
             {
                 for (int j = 0; j < kSize; j++)
                 {
                     grid_temp_[i, j].PrintTest();
                 }
                 Console.WriteLine();
-            }
+                    
+                }
+                Console.WriteLine("Print temp orginał:");
+                for (int i = 0; i < kSize; i++)
+                {
+                    for (int j = 0; j < kSize; j++)
+                    {
+                        grid_[i, j].PrintTest();
+                    }
+                    Console.WriteLine();
 
+                }
+            }
             for (int i = 0; i < kSize; i++)
             {
                 for (int j = 0; j < kSize; j++)
                 {
                     if (grid_[i,j].GetSINR(station_in_sys.channel_) > 6)
                     {
+                        Console.WriteLine("KOLEJNA ITERACJA");
                         double temp_1w = calculations_.CalculateTheDistace(station_in_sys.GetLocationX(), station_in_sys.GetLocationY(), i, j);
                         double temp_11w = calculations_.CalculateTheDistace2(station_new.GetLocationX(), station_new.GetLocationY(), i, j);
                         double temp_2w = calculations_.CalculateFSPL(2.4);
@@ -119,19 +135,23 @@ namespace Radiowe
                         double temp_4w = calculations_.CalculateI_(station_new.GetPower(), station_new.GetGain(), station_in_sys.antenna_gain_receiver_);
                         double temp_5w = calculations_.CalculateNoise(station_in_sys.band_);//pasmo
                         double channel_diff = Math.Abs(station_in_sys.channel_ - station_new.channel_);
+                        Console.WriteLine("channel diff" + channel_diff);
                         double temp6w = calculations_.CalculateSINR(channel_diff); // tu juz wychodzi nowa wartość SINR'u 
-
+                        Console.WriteLine("TEMP6XXXXX: " + temp6w);
                         double newSinr = calculations_.ToReplaceSINR(grid_[i, j].GetSINR(station_in_sys.channel_), temp6w); 
                         double diff = calculations_.ToReplaceSINR(grid_[i, j].GetSINR(station_in_sys.channel_), newSinr); 
                         if(diff>=6)
                         {
-                            Console.WriteLine("edytycja listy pierwsza pętla");
+                            Console.WriteLine("edytycja listy pierwsza pętla"+" diff "+diff );
                             grid_temp_[i, j].EditList(station_in_sys.name_, grid_temp_[i, j].GetSnr(station_in_sys.channel_), diff, station_in_sys.channel_);
                         }
                         else
                         {
-                            Console.WriteLine("Interferencja destruktywna jest zbyt duża - stacja nie może zostać dodana do systemu 1 petla");
-                            return;
+                            Console.WriteLine("Interferencja destruktywna jest zbyt duża - stacja nie może zostać dodana do systemu 1 petla"+" i "+i+" j "+j + " diff " + diff);
+                            Console.WriteLine("wartości sinru" + " grid_[i, j].GetSINR(station_in_sys.channel_) " + grid_[i, j].GetSINR(station_in_sys.channel_) + " newSinr " + newSinr + " diff " + diff);
+                            Console.WriteLine("newSinr " + " grid_[i, j].GetSINR(station_in_sys.channel_) " + grid_[i, j].GetSINR(station_in_sys.channel_) + " temp6w " + temp6w + " diff " + diff);
+                            count2 = 0;
+                            return false;
                         }
                         
 
@@ -156,11 +176,12 @@ namespace Radiowe
                     double SNRw = calculations_.CalculateSNR_Receiver();
                     if (i == station_new.GetLocationX() && j == station_new.GetLocationY())
                     {
-                        grid_temp_[i, j].AddToList2(station_new.name_, -1, -1, station_new.channel_);
+                        //grid_temp_[i, j].AddToList2(station_new.name_, -1, -1, station_new.channel_);
+                        grid_temp_[i, j].EditList(station_new.name_, -1, -1, station_new.channel_);
                     }
                     else
-                        grid_temp_[i, j].AddToList2(station_new.name_, SNRw, SNRw, station_new.channel_);
-
+                        //grid_temp_[i, j].AddToList2(station_new.name_, SNRw, SNRw, station_new.channel_);
+                        grid_temp_[i, j].EditList(station_new.name_, SNRw, SNRw, station_new.channel_);
                 }
             }
             for (int i = 0; i < kSize; i++)
@@ -189,7 +210,8 @@ namespace Radiowe
                         else
                         {
                             Console.WriteLine("Interferencja destruktywna jest zbyt duża - stacja nie może zostać dodana do systemu 2petla");
-                            return;
+                            count2 = 0;
+                            return false;
                         }
 
 
@@ -208,32 +230,49 @@ namespace Radiowe
 
 
 
+            count2++;
 
-
-
-
-            Console.WriteLine("Użytkownik może zostać dodany do systemu");
-            //zapisz kopie jako orginał
-            grid_ = grid_temp_;
-            for (int x = 0; x < kSize; x++)
+            Console.WriteLine("count "+ count+" count 2 "+ count2+" SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+            if (count==count2)
             {
-                for (int z = 0; z < kSize; z++)
+                Console.WriteLine("Użytkownik może zostać dodany do systemu xDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+                //zapisz kopie jako orginał
+                Console.WriteLine("orginał");
+                for (int x = 0; x < kSize; x++)
                 {
-                    grid_temp_[x, z].PrintTest();
+                    for (int z = 0; z < kSize; z++)
+                    {
+                        grid_[x, z].PrintTest();
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
-            }
-            Console.WriteLine("orginał");
-            for (int x = 0; x < kSize; x++)
-            {
-                for (int z = 0; z < kSize; z++)
+
+               
+                Console.WriteLine("kopia ");
+                for (int x = 0; x < kSize; x++)
                 {
-                    grid_[x, z].PrintTest();
+                    for (int z = 0; z < kSize; z++)
+                    {
+                        grid_temp_[x, z].PrintTest();
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
+                grid_ = grid_temp_;
+                Console.WriteLine("nowy orginał");
+                for (int x = 0; x < kSize; x++)
+                {
+                    for (int z = 0; z < kSize; z++)
+                    {
+                        grid_[x, z].PrintTest();
+                    }
+                    Console.WriteLine();
+                }
+                count2 = 0;
+                return true;
+                Console.WriteLine("tutaj");
             }
-            Console.WriteLine("tutaj");
-            
+            return true;
+
         }
         public bool CheckUserParameter(BaseStation station)
         {
@@ -266,8 +305,9 @@ namespace Radiowe
        private int size_;
         private int last_;
        private int amount_of_base_stations_=0;
+        private int count2 = 0;
        private Cell[,] grid_;
-        private Cell[,] grid_temp_;
+        private Cell[,] grid_temp_= new Cell[kSize, kSize];
        private const int kSize=30;
        private Calculations calculations_;
     }

@@ -101,8 +101,16 @@ namespace Radiowe
 
         public double ToReplaceSINR(double old_SINR, double new_SINR )
         {
-            double różnica = 10 * Math.Log10(Math.Pow(10, old_SINR / 10) - Math.Pow(10, new_SINR / 10));
-            return różnica;
+            Console.WriteLine("wartosci do podania: " + old_SINR + " druga: " + new_SINR);
+            double roznica = 10 * Math.Log10(Math.Pow(10, old_SINR / 10) - Math.Pow(10, new_SINR / 10));
+            Console.WriteLine("drugi czlon, new SINR:" + new_SINR);
+            Console.WriteLine("ToReplaceSinr: " + Math.Log10(Math.Pow(10, old_SINR / 10)) + " drugi człon " + Math.Pow(10, new_SINR / 10));
+            Console.WriteLine("ROZNICA: " + roznica);
+            if(Double.IsNaN(roznica))
+            {
+                return old_SINR;
+            }
+           else return roznica;
         }
 
         /*

@@ -6,10 +6,9 @@ namespace Radiowe.Interfaces
 {
     interface ICellManagment
     {
-        void AddUser(User user);
         void AddStation(BaseStation station);
-        void DeleteUser();
         void DeleteStation();
         void AddToList(double SNR, BaseStation station);
+        void AddToList2(string BaseName, double SNR, double SINR, int channel);
     }
 }

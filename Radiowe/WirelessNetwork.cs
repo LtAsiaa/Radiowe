@@ -20,9 +20,24 @@ namespace Radiowe
             }
             else
             {
+                int counter = 0;
                 foreach (var list_station in base_station_system_)
                 {
-                    grid_.AddMoreBaseStation(list_station, base_station);
+                    Console.WriteLine("POROWNUJE STACJE ");
+                    if (grid_.AddMoreBaseStation(list_station, base_station, base_station_system_.Count) == true)
+                    {
+                        counter++;
+                    }
+                    else break;
+                }
+                if (counter == base_station_system_.Count)
+                {
+                    Console.WriteLine("ROWNA SIE SOBIE");
+                    base_station_system_.Add(base_station);
+                }
+                else
+                {
+                    Console.WriteLine("NIE DODA SIE");
                 }
             }
         }
@@ -36,7 +51,7 @@ namespace Radiowe
         {
             foreach(var list_station in base_station_system_)
             {
-                grid_.AddMoreBaseStation(list_station, baseStation1);
+                //grid_.AddMoreBaseStation(list_station, baseStation1);
             }
         }
         public void test()

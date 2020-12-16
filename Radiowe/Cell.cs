@@ -222,7 +222,10 @@ namespace Radiowe
 
         public void AddToList2(string BaseName, double SNR, double SINR, int channel)
         {
-            cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
+            //     cell_info_.RemoveAt(channel - 1);
+            //     cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
+            cell_info_[channel - 1] = new Tuple<string, double, double>(BaseName, SNR, SINR);
+
         }
         public void AddToList2Copy(string BaseName, double SNR, double SINR, int channel)
         {
@@ -278,6 +281,10 @@ namespace Radiowe
             return cell_info_[channel - 1].Item3;
         }
 
+        public string GetName(int channel)
+        {
+            return cell_info_[channel - 1].Item1;
+        }
    
     }
 }

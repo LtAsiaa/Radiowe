@@ -61,9 +61,14 @@ namespace Radiowe
                         if (i == station.GetLocationX() && j == station.GetLocationY())
                         {
                             grid_[i, j].AddToList2(station.name_, -1, -1, station.channel_);
+                            //grid_[i, j].AddToList2(station.name_, station.GetPower()+station.GetGain(), station.GetPower() + station.GetGain(), station.channel_); // -1, -1
                         }
-                        else
-                        grid_[i, j].AddToList2(station.name_,SNRw,SNRw,station.channel_);
+                        else if (SNRw >= 6)
+                        {
+                            grid_[i, j].AddToList2(station.name_, SNRw, SNRw, station.channel_);
+                          //  grid_[i, j].PrintTest();
+                        }
+                        
                         //Console.WriteLine("i: " + i + " j: " + j + " SNR " + SNRw);
                     }
                 }
@@ -124,7 +129,7 @@ namespace Radiowe
             {
                 for (int j = 0; j < kSize; j++)
                 {
-                    if (grid_[i,j].GetSINR(station_in_sys.channel_) > 6)
+                    if (grid_[i,j].GetSINR(station_in_sys.channel_) > 6 && grid_[i, j].GetName(station_in_sys.channel_) == station_in_sys.name_)
                     {
                         Console.WriteLine("KOLEJNA ITERACJA");
                         double temp_1w = calculations_.CalculateTheDistace(station_in_sys.GetLocationX(), station_in_sys.GetLocationY(), i, j);
@@ -137,12 +142,13 @@ namespace Radiowe
                         double channel_diff = Math.Abs(station_in_sys.channel_ - station_new.channel_);
                         Console.WriteLine("channel diff" + channel_diff);
                         double temp6w = calculations_.CalculateSINR(channel_diff); // tu juz wychodzi nowa wartość SINR'u 
-                        Console.WriteLine("TEMP6XXXXX: " + temp6w);
+                        Console.WriteLine("Stara wartość SINR:" + grid_[i, j].GetSINR(station_in_sys.channel_));
+                        Console.WriteLine("Nowa wartość SINR: " + temp6w);
                         double newSinr = calculations_.ToReplaceSINR(grid_[i, j].GetSINR(station_in_sys.channel_), temp6w); 
-                        double diff = calculations_.ToReplaceSINR(grid_[i, j].GetSINR(station_in_sys.channel_), newSinr); 
-                        if(diff>=6)
+                        double diff = calculations_.ToReplaceSINR(grid_[i, j].GetSINR(station_in_sys.channel_), newSinr); // nowa wartość sinru (po odjeciu)
+                        if(diff>=6)//!
                         {
-                            Console.WriteLine("edytycja listy pierwsza pętla"+" diff "+diff );
+                            Console.WriteLine("edytycja siatki pierwsza pętla"+" diff "+diff );
                             grid_temp_[i, j].EditList(station_in_sys.name_, grid_temp_[i, j].GetSnr(station_in_sys.channel_), diff, station_in_sys.channel_);
                         }
                         else
@@ -164,7 +170,20 @@ namespace Radiowe
                 }
                
             }
+
+            Console.WriteLine("Print temp kopia po piwerwszym przejsciu:");
+            for (int i = 0; i < kSize; i++)
+            {
+                for (int j = 0; j < kSize; j++)
+                {
+                    grid_temp_[i, j].PrintTest();
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("punkt prerwania");
+
             //sprawdznie w druga strone
+            // tutaj dodawanie stacji nowej to grid_tempa
             for (int i = 0; i < kSize; i++)
             {
                 for (int j = 0; j < kSize; j++)
@@ -176,19 +195,35 @@ namespace Radiowe
                     double SNRw = calculations_.CalculateSNR_Receiver();
                     if (i == station_new.GetLocationX() && j == station_new.GetLocationY())
                     {
-                        //grid_temp_[i, j].AddToList2(station_new.name_, -1, -1, station_new.channel_);
                         grid_temp_[i, j].AddToList2(station_new.name_, -1, -1, station_new.channel_);
+                       // grid_temp_[i, j].AddToList2(station_new.name_,station_new.GetPower()+station_new.GetGain(), station_new.GetPower() + station_new.GetGain(), station_new.channel_); // -1, -1
                     }
-                    else
-                        //grid_temp_[i, j].AddToList2(station_new.name_, SNRw, SNRw, station_new.channel_);
+                    else if (SNRw >= 6)
+                    {
                         grid_temp_[i, j].AddToList2(station_new.name_, SNRw, SNRw, station_new.channel_);
+                    }
+                        //grid_temp_[i, j].AddToList2(station_new.name_, SNRw, SNRw, station_new.channel_);
+                        
                 }
             }
+
+            Console.WriteLine("Print temp kopia po dodaniu do tempa station_new:");
             for (int i = 0; i < kSize; i++)
             {
                 for (int j = 0; j < kSize; j++)
                 {
-                    if (grid_temp_[i, j].GetSINR(station_new.channel_) > 6)
+                    grid_temp_[i, j].PrintTest();
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("punkt prerwania2");
+
+
+            for (int i = 0; i < kSize; i++)
+            {
+                for (int j = 0; j < kSize; j++)
+                {
+                    if (grid_temp_[i, j].GetSINR(station_new.channel_) > 6 && grid_temp_[i,j].GetName(station_new.channel_) == station_new.name_) //! 
                     {
                         double temp_1w = calculations_.CalculateTheDistace(station_new.GetLocationX(), station_new.GetLocationY(), i, j);
                         double temp_11w = calculations_.CalculateTheDistace2(station_in_sys.GetLocationX(), station_in_sys.GetLocationY(), i, j);
@@ -199,7 +234,6 @@ namespace Radiowe
                         double temp_5w = calculations_.CalculateNoise(station_new.band_);//pasmo
                         double channel_diff = Math.Abs(station_new.channel_ - station_in_sys.channel_);
                         double temp6w = calculations_.CalculateSINR(channel_diff); // tu juz wychodzi nowa wartość SINR'u 
-
                         double newSinr = calculations_.ToReplaceSINR(grid_temp_[i, j].GetSINR(station_new.channel_), temp6w);
                         double diff = calculations_.ToReplaceSINR(grid_temp_[i, j].GetSINR(station_new.channel_), newSinr);
                         if (diff >= 6)
@@ -224,6 +258,17 @@ namespace Radiowe
                 }
 
             }
+
+            Console.WriteLine("Print temp kopia po drugim przejściu:");
+            for (int i = 0; i < kSize; i++)
+            {
+                for (int j = 0; j < kSize; j++)
+                {
+                    grid_temp_[i, j].PrintTest();
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("punkt prerwania3");
 
 
 

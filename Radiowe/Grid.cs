@@ -343,6 +343,13 @@ namespace Radiowe
        {
            amount_of_base_stations_++;
        }
+
+        public Cell ReturnCell(int i, int j)
+        {
+            Cell result = grid_[i, j];
+            return result;
+        }
+
         private bool first_ = true;
         private int leftBorder_;
         private int rightBorder_;

@@ -285,6 +285,6 @@ namespace Radiowe
         {
             return cell_info_[channel - 1].Item1;
         }
-   
+        
     }
 }

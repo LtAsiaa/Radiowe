@@ -69,6 +69,10 @@ namespace Radiowe
             Console.WriteLine("noise" + temp3);
             Console.WriteLine(SNR);
         }
+        public Grid ReturnGrid()
+        {
+            return this.grid_;
+        }
 
         private List<BaseStation> base_station_system_ = new List<BaseStation>(); // przy uruchomieniu wgrywanie stacji bazowych
         private Calculations calculations_;

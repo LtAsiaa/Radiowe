@@ -7,5 +7,6 @@ namespace Radiowe.Interfaces
     interface IPrint
     {
         void Print(int type);
+        Cell ReturnCell(int i, int j);
     }
 }

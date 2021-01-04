@@ -25,5 +25,10 @@ namespace Radio.Pages
         {
 
         }
+
+        protected virtual void btnLogin_Click1(EventArgs e)
+        {
+
+        }
     }
 }

@@ -9,11 +9,13 @@ namespace Radiowe
         public WirelessNetwork()
         {
             calculations_ = new Calculations();
-            grid_ = new Grid();
+           
         }
         public void AddStationToSystem(BaseStation base_station)
         {
-            if(base_station_system_.Count==0)
+            grid_ = new Grid();
+            //przeniesc grida
+            if (base_station_system_.Count==0)
             {
                 base_station_system_.Add(base_station);
                 grid_.AddFirstBaseStation(base_station);

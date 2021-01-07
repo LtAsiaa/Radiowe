@@ -17,7 +17,7 @@ namespace Radiowe
             network.AddStationToSystem(new BaseStation(5, 20, 40, 10, 1, 0, "trzecia"));
             network.AddStationToSystem(new BaseStation(25, 5, 5, 3, 5, 0, "czwarta"));
             //int x, int y, double antenna_gain, double power, int number_of_channel , double antenna_gain_receiver, string name , double band = 10000000
-            network.AddStationToSystem(new BaseStation(6, 6, 10, 1, 3, 0, "trzecią"));
+            network.AddStationToSystem(new BaseStation(6, 6, 10, 1, 3, 0, "trzecia2"));
             //Console.WriteLine("Uzytkownik moze zostac dodany do systemu");
 
 

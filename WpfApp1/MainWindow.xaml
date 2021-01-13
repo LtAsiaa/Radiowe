@@ -42,18 +42,7 @@
                     <Label Content="Nzawa użytkownika:" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
                     <Button x:Name="ButtonUsunUzytkownika" Content="Usuń użytkownika" HorizontalAlignment="Left" Margin="174,279,0,0" VerticalAlignment="Top" Click="ButtonUsunUzytkownika_Click" Height="24" Width="100"/>
                     <DataGrid x:Name="DataGridUsers" HorizontalAlignment="Left" Height="624" Margin="297,30,0,0" VerticalAlignment="Top" Width="550" IsReadOnly="True"/>
-                    <ComboBox x:Name="TextBoxNumerKanalu" HorizontalAlignment="Left" Margin="141,233,0,0" VerticalAlignment="Top" Width="133" Height="24">
-                        <ComboBoxItem Content="1" IsSelected="True"/>
-                        <ComboBoxItem Content="2"/>
-                        <ComboBoxItem Content="3"/>
-                        <ComboBoxItem Content="4"/>
-                        <ComboBoxItem Content="5"/>
-                        <ComboBoxItem Content="6"/>
-                        <ComboBoxItem Content="7"/>
-                        <ComboBoxItem Content="8"/>
-                        <ComboBoxItem Content="9"/>
-                        <ComboBoxItem Content="10"/>
-                    </ComboBox>
+                    <ComboBox x:Name="ComboBoxNumerKanalu" HorizontalAlignment="Left" Margin="141,233,0,0" VerticalAlignment="Top" Width="133" Height="24" Loaded="ComboBoxNumerKanalu_Loaded"/>
                     <Label Content="Zysk anteny odbiorczej:" HorizontalAlignment="Left" Margin="15,146,0,0" VerticalAlignment="Top" Height="24" Width="133"/>
                     <TextBox x:Name="TextBoxZyskAntenyO" HorizontalAlignment="Left" Height="24" Margin="152,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
                     <ComboBox x:Name="ComboBoxZO" HorizontalAlignment="Left" Margin="222,146,0,0" VerticalAlignment="Top" Width="52" Height="24" Loaded="ComboBoxZO_Loaded"/>
@@ -61,8 +50,6 @@
                     <Label Content="ACLR +2(dB):" HorizontalAlignment="Left" Margin="19,204,0,0" VerticalAlignment="Top" Height="24" Width="117"/>
                     <TextBox x:Name="TextBoxACLR1" HorizontalAlignment="Left" Height="24" Margin="141,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133"/>
                     <TextBox x:Name="TextBoxACLR2" HorizontalAlignment="Left" Height="24" Margin="141,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133"/>
-                    <Button x:Name="PlotMap" Content="Rysuj mape" HorizontalAlignment="Left" Margin="172,429,0,0" VerticalAlignment="Top" Width="75" Click="PlotMap_Click"/>
-                    <TextBlock x:Name="lalalal" HorizontalAlignment="Left" Margin="73,489,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="35" Width="94"/>
                 </Grid>
                 <RadioButton x:Name="RadioBaza" Content="Nie połączono" Margin="42,642,1378,53" Checked="RadioBazaChecked"/>
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="897,53,15,66">
@@ -71,6 +58,9 @@
                         <Grid Name="Grid2" HorizontalAlignment="Left" Height="800" Margin="0,0,0,0" VerticalAlignment="Top" Width="800"/>
                     </Canvas>
                 </ScrollViewer>
+                <Label Content="Numer kanału:" HorizontalAlignment="Left" Margin="897,686,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
+                <ComboBox x:Name="ComboBoxNumerKanaluMapa" HorizontalAlignment="Left" Margin="1018,686,0,0" VerticalAlignment="Top" Width="120" Loaded="ComboBoxNumerKanaluMapa_Loaded" DropDownClosed="ComboBoxNumerKanaluMapa_DropDownClosed"/>
+                <Button x:Name="ButtonRefresh" Content="Refresh Map" HorizontalAlignment="Left" Margin="1157,686,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
             </Grid>
         </TabItem>
 

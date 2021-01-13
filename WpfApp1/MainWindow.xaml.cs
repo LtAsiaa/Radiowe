@@ -25,8 +25,11 @@ namespace WpfApp1
         User user = null;
         //string x ="1";
         List<PlaceholderInfoClass> InfoList = new List<PlaceholderInfoClass>();
-        
 
+        DataTable DTUsers;
+        DataTable DTName;
+
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -37,15 +40,18 @@ namespace WpfApp1
             if (DataBase.Open())
             {
                 RadioBaza.IsChecked = true;
-                DataGridUsers.ItemsSource = DataBase.UserList().DefaultView;
+                DTUsers = DataBase.BaseTable("dbo.Users2");
+                DataGridUsers.ItemsSource = DTUsers.DefaultView;
                 Plot.plotmap(Grid2, 200, 200);
-                Plot.plotStationStart(Grid2, DataBase.UserList());
-                //string Data= DataBase.UserList();
+                DTName = DataBase.BaseTable("dbo.Name1");
+                Plot.plotStation2(Grid2, DTName, DTUsers);
             }
             else
             {
                 RadioBaza.IsChecked = false;
             }
+
+            //Thre
             //DataGridUsers.DataContext = DataBase.UserList();
             //Point t = PointToScreen(new Point(ActualWidth, ActualHeight));
             //TextBoxTest.Text = t;
@@ -135,11 +141,19 @@ namespace WpfApp1
                 {
                     _zyskAntenyO = 10 * Math.Log10((_zyskAntenyO * 1000) / 0.001);
                 }
-
-
-                DataBase.Command(string.Format("INSERT dbo.Users(user1,x,y,moc,zysk,nrkanalu) VALUES ('{0}', {1}, {2}, {3}, {4}, {5});", TextBoxNazwaUzytkownika.Text.ToString(), int.Parse(TextBoxLokalizacjaX.Text), int.Parse(TextBoxLokalizacjaY.Text), _mocNadawcza.ToString().Replace(',', '.'), _zyskAntenyN.ToString().Replace(',', '.'), int.Parse(TextBoxNumerKanalu.Text)));
-                DataGridUsers.ItemsSource = DataBase.UserList().DefaultView;
-                Plot.plotStation(Grid2, int.Parse(TextBoxLokalizacjaX.Text), int.Parse(TextBoxLokalizacjaY.Text));
+                var NazwaUzytkownika = TextBoxNazwaUzytkownika.Text.ToString();
+                var LokalizacjaX = int.Parse(TextBoxLokalizacjaX.Text);
+                var LokalizacjaY = int.Parse(TextBoxLokalizacjaY.Text);
+                var MocNadawcza = _mocNadawcza.ToString().Replace(',', '.');
+                var ZyskAntenyN = _zyskAntenyN.ToString().Replace(',', '.');
+                var ZyskAntenyO = _zyskAntenyO.ToString().Replace(',', '.');
+                var NrKanalu = int.Parse(ComboBoxNumerKanalu.Text);
+                DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza, ZyskAntenyN, ZyskAntenyO, NrKanalu);
+                DTUsers = DataBase.BaseTable("dbo.Users2");
+                DataGridUsers.ItemsSource = DTUsers.DefaultView;
+                //DataBase.Command(string.Format("INSERT dbo.Users(user1,x,y,moc,zysk,nrkanalu) VALUES ('{0}', {1}, {2}, {3}, {4}, {5});", TextBoxNazwaUzytkownika.Text.ToString(), int.Parse(TextBoxLokalizacjaX.Text), int.Parse(TextBoxLokalizacjaY.Text), _mocNadawcza.ToString().Replace(',', '.'), _zyskAntenyN.ToString().Replace(',', '.'), int.Parse(TextBoxNumerKanalu.Text)));
+                //DataGridUsers.ItemsSource = DataBase.UserList().DefaultView;
+                //Plot.plotStation(Grid2, int.Parse(TextBoxLokalizacjaX.Text), int.Parse(TextBoxLokalizacjaY.Text));
                 //DataBase.Open();
                 //DataBase.Data
             }
@@ -161,7 +175,7 @@ namespace WpfApp1
             ComboBoxZN.Items.Add("mW");
             ComboBoxZN.Items.Add("W");
             ComboBoxZN.Items.Add("kW");
-            ComboBoxZN.Items.Add("dBm");
+            ComboBoxZN.Items.Add("dBi");
         }
 
         private void ComboBoxZO_Loaded(object sender, RoutedEventArgs e)
@@ -171,7 +185,7 @@ namespace WpfApp1
             ComboBoxZO.Items.Add("mW");
             ComboBoxZO.Items.Add("W");
             ComboBoxZO.Items.Add("kW");
-            ComboBoxZO.Items.Add("dBm");
+            ComboBoxZO.Items.Add("dBi");
         }
 
         private void ButtonUsunUzytkownika_Click(object sender, RoutedEventArgs e)
@@ -186,8 +200,8 @@ namespace WpfApp1
                 if (DataGridUsers.SelectedItem != null)
                 {
                     Plot.deleteStation(Grid2, int.Parse((((DataRowView)DataGridUsers.SelectedItem).Row["x"]).ToString()), int.Parse((((DataRowView)DataGridUsers.SelectedItem).Row["y"]).ToString()));
-                    DataBase.Command(string.Format("delete from dbo.users where ID= '{0}' ", ((DataRowView)DataGridUsers.SelectedItem).Row["ID"].ToString()));
-                    DataGridUsers.ItemsSource = DataBase.UserList().DefaultView;
+                    DataBase.Command(string.Format("delete from dbo.Users2 where ID= '{0}' ", ((DataRowView)DataGridUsers.SelectedItem).Row["ID"].ToString()));
+                    DataGridUsers.ItemsSource = DTUsers.DefaultView;
 
                     TextBoxTest.Text = "ok";
                 }
@@ -252,6 +266,52 @@ namespace WpfApp1
         private void PlotMap_Click(object sender, RoutedEventArgs e)
         {
             //Plot.plot(Grid2, TextBoxTest);
+        }
+
+        private void ComboBoxNumerKanaluMapa_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBoxNumerKanaluMapa.SelectedItem = 1;
+            ComboBoxNumerKanaluMapa.Items.Add(1);
+            ComboBoxNumerKanaluMapa.Items.Add(2);
+            ComboBoxNumerKanaluMapa.Items.Add(3);
+            ComboBoxNumerKanaluMapa.Items.Add(4);
+            ComboBoxNumerKanaluMapa.Items.Add(5);
+            ComboBoxNumerKanaluMapa.Items.Add(6);
+            ComboBoxNumerKanaluMapa.Items.Add(7);
+            ComboBoxNumerKanaluMapa.Items.Add(8);
+            ComboBoxNumerKanaluMapa.Items.Add(9);
+            ComboBoxNumerKanaluMapa.Items.Add(10);
+        }
+
+        private void ComboBoxNumerKanaluMapa_DropDownClosed(object sender, EventArgs e)
+        {
+            Plot.ClearMap(Grid2);
+            if (ComboBoxNumerKanaluMapa.Text == "")
+            {
+                DTName = DataBase.BaseTable("dbo.Name1");
+                Plot.plotStation2(Grid2, DTName, DTUsers);
+            }
+            else
+            {
+                string name = "dbo.Name" + ComboBoxNumerKanaluMapa.Text;
+                DTName = DataBase.BaseTable(name);
+                Plot.plotStation2(Grid2, DTName, DTUsers);
+            }
+        }
+
+        private void ComboBoxNumerKanalu_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBoxNumerKanalu.SelectedItem = 1;
+            ComboBoxNumerKanalu.Items.Add(1);
+            ComboBoxNumerKanalu.Items.Add(2);
+            ComboBoxNumerKanalu.Items.Add(3);
+            ComboBoxNumerKanalu.Items.Add(4);
+            ComboBoxNumerKanalu.Items.Add(5);
+            ComboBoxNumerKanalu.Items.Add(6);
+            ComboBoxNumerKanalu.Items.Add(7);
+            ComboBoxNumerKanalu.Items.Add(8);
+            ComboBoxNumerKanalu.Items.Add(9);
+            ComboBoxNumerKanalu.Items.Add(10);
         }
     }
 }

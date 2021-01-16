@@ -76,14 +76,14 @@ namespace Radiowe
                     }
                 }
                 first_ = false;
-                for (int i = 0; i < kSize; i++)
-                {
-                    for (int j = 0; j < kSize; j++)
-                    {
-                        grid_[i, j].PrintTest();
-                    }
-                    Console.WriteLine("");
-                }
+                // for (int i = 0; i < kSize; i++)
+                //   {
+                //       for (int j = 0; j < kSize; j++)
+                //      {
+                //          grid_[i, j].PrintTest();
+                //      }
+                //      Console.WriteLine("");
+                //  }
                 Console.WriteLine("pierwsza stacja");
 
                 return grid_;
@@ -111,6 +111,7 @@ namespace Radiowe
                         grid_temp_[i, j] = new Cell(grid_[i, j]);
                     }
                 }
+                /*
                 Console.WriteLine("Print temp kopia:");
                 for (int i = 0; i < kSize; i++)
                 {
@@ -131,6 +132,7 @@ namespace Radiowe
                     Console.WriteLine();
 
                 }
+                */
             }
             for (int i = 0; i < kSize; i++)
             {
@@ -192,15 +194,15 @@ namespace Radiowe
 
             }
 
-            Console.WriteLine("Print temp kopia po piwerwszym przejsciu:");
-            for (int i = 0; i < kSize; i++)
-            {
-                for (int j = 0; j < kSize; j++)
-                {
-                    grid_temp_[i, j].PrintTest();
-                }
-                Console.WriteLine();
-            }
+            //  Console.WriteLine("Print temp kopia po piwerwszym przejsciu:");
+            // for (int i = 0; i < kSize; i++)
+            // {
+            //    for (int j = 0; j < kSize; j++)
+            //    {
+            //      grid_temp_[i, j].PrintTest();
+            ///   }
+            //   Console.WriteLine();
+            // }
             Console.WriteLine("punkt prerwania");
 
             //sprawdznie w druga strone
@@ -229,14 +231,14 @@ namespace Radiowe
             }
 
             Console.WriteLine("Print temp kopia po dodaniu do tempa station_new:");
-            for (int i = 0; i < kSize; i++)
-            {
-                for (int j = 0; j < kSize; j++)
-                {
-                    grid_temp_[i, j].PrintTest();
-                }
-                Console.WriteLine();
-            }
+            // for (int i = 0; i < kSize; i++)
+            // {
+            //  for (int j = 0; j < kSize; j++)
+            //   {
+            //       grid_temp_[i, j].PrintTest();
+            //    }
+            //   Console.WriteLine();
+            //  }
             Console.WriteLine("punkt prerwania2");
 
 
@@ -289,15 +291,15 @@ namespace Radiowe
 
             }
 
-            Console.WriteLine("Print temp kopia po drugim przejściu:");
-            for (int i = 0; i < kSize; i++)
-            {
-                for (int j = 0; j < kSize; j++)
-                {
-                    grid_temp_[i, j].PrintTest();
-                }
-                Console.WriteLine();
-            }
+            //  Console.WriteLine("Print temp kopia po drugim przejściu:");
+            //  for (int i = 0; i < kSize; i++)
+            //  {
+            //      for (int j = 0; j < kSize; j++)
+            //      {
+            //          grid_temp_[i, j].PrintTest();
+            //     }
+            //      Console.WriteLine();
+            //  }
             Console.WriteLine("punkt prerwania3");
 
 
@@ -313,35 +315,35 @@ namespace Radiowe
                 Console.WriteLine("Użytkownik może zostać dodany do systemu xDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
                 //zapisz kopie jako orginał
                 Console.WriteLine("orginał");
-                for (int x = 0; x < kSize; x++)
-                {
-                    for (int z = 0; z < kSize; z++)
-                    {
-                        grid_[x, z].PrintTest();
-                    }
-                    Console.WriteLine();
-                }
+                //  for (int x = 0; x < kSize; x++)
+                //  {
+                //      for (int z = 0; z < kSize; z++)
+                //     {
+                //         grid_[x, z].PrintTest();
+                //     }
+                //     Console.WriteLine();
+                // }
 
 
                 Console.WriteLine("kopia ");
-                for (int x = 0; x < kSize; x++)
-                {
-                    for (int z = 0; z < kSize; z++)
-                    {
-                        grid_temp_[x, z].PrintTest();
-                    }
-                    Console.WriteLine();
-                }
+                // for (int x = 0; x < kSize; x++)
+                // {
+                //     for (int z = 0; z < kSize; z++)
+                //     {
+                //         grid_temp_[x, z].PrintTest();
+                //     }
+                //      Console.WriteLine();
+                //  }
                 grid_ = grid_temp_;
                 Console.WriteLine("nowy orginał");
-                for (int x = 0; x < kSize; x++)
-                {
-                    for (int z = 0; z < kSize; z++)
-                    {
-                        grid_[x, z].PrintTest();
-                    }
-                    Console.WriteLine();
-                }
+                //  for (int x = 0; x < kSize; x++)
+                //  {
+                //     for (int z = 0; z < kSize; z++)
+                //      {
+                //         grid_[x, z].PrintTest();
+                //     }
+                //     Console.WriteLine();
+                // }
                 count2 = 0;
                 return true;
                 Console.WriteLine("tutaj");

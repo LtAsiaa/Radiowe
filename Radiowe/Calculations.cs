@@ -33,22 +33,31 @@ namespace Radiowe
             return the_distance_2;
         }
 
-        public double CalculateFSPL(double bandwidth)
+        public double CalculateFSPL(double bandwidth, double condition)
         {
             //  FSPL_ = 32.44d + 20 * Math.Log10(the_distance_) + 20 * Math.Log10(band);
             FSPL_ = 92.45d + 20 * Math.Log10(the_distance_) + 20 * Math.Log10(bandwidth); // distance w km, band w GHz
+            if (condition == 0)
+            {
+                FSPL_ = 92.45d + 20 * Math.Log10(bandwidth);
+            }
             return FSPL_;
         }
 
-        public double CalculateFSPL2(double bandwidth)
+        public double CalculateFSPL2(double bandwidth,double condition)
         {
             //  FSPL_ = 32.44d + 20 * Math.Log10(the_distance_) + 20 * Math.Log10(band);
             FSPL_2 = 92.45d + 20 * Math.Log10(the_distance_2) + 20 * Math.Log10(bandwidth);
+            if (condition == 0)
+            {
+                FSPL_2 = 0;
+            }
             return FSPL_2;
         }
         public double CalculateReceiverPower(double transmitter_power, double transmitter_gain, double receiver_gain)
         {
             receiver_power = transmitter_power - FSPL_ + transmitter_gain + receiver_gain -4; // 4 odpowiada NF (noise figure)
+           
             return receiver_power;
         }
 

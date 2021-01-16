@@ -6,7 +6,7 @@ using Radiowe.Interfaces;
 
 namespace Radiowe
 {
-    class Cell : IPrint, ICellManagment
+    public class Cell : IPrint, ICellManagment
     {// Id X Y 10x double liczba 10x Id_base_station 
         public Cell()
         {
@@ -191,6 +191,56 @@ namespace Radiowe
                         Console.Write(Convert.ToInt32(cell_info_[5].Item2) + "^");
                     }
                 }
+
+                else if (cell_info_.Count != 0 && (cell_info_[6].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[6].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[6].Item2) + "&");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[6].Item2) + "&");
+                    }
+                }
+
+                else if (cell_info_.Count != 0 && (cell_info_[7].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[6].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[7].Item2) + "*");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[7].Item2) + "*");
+                    }
+                }
+
+                else if (cell_info_.Count != 0 && (cell_info_[8].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[6].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[8].Item2) + "(");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[8].Item2) + "(");
+                    }
+                }
+
+                else if (cell_info_.Count != 0 && (cell_info_[9].Item2) > 0d)
+                {
+                    if (Convert.ToInt32(cell_info_[9].Item2) < 10)
+                    {
+                        Console.Write("0" + Convert.ToInt32(cell_info_[9].Item2) + ")");
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToInt32(cell_info_[9].Item2) + ")");
+                    }
+                }
+
+
                 else
                 {
                     Console.Write("__|");

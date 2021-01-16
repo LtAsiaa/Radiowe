@@ -6,8 +6,8 @@ namespace Radiowe.Interfaces
 {
     interface ILocationManagment
     {
-        public int GetLocationX();
-        public int GetLocationY();
+        int GetLocationX();
+        int GetLocationY();
         
     }
 }

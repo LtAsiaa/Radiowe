@@ -250,7 +250,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(1);
                             todb_table11.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(1) != 0)
-                                DataBase.addName("Snr1", (i + 1).ToString(), grid_db[i, j].GetSnr(1).ToString(), j + 1);
+                                DataBase.addName("Snr1", (i + 1).ToString(), grid_db[i, j].GetSnr(1).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table12.NewRow();
                             row["lokalizacjaX"] = i;
@@ -258,7 +258,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(2);
                             todb_table12.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(2) != 0)
-                                DataBase.addName("Snr2", (i + 1).ToString(), grid_db[i, j].GetSnr(2).ToString(), j + 1);
+                                DataBase.addName("Snr2", (i + 1).ToString(), grid_db[i, j].GetSnr(2).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table13.NewRow();
                             row["lokalizacjaX"] = i;
@@ -266,7 +266,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(3);
                             todb_table13.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(3) != 0)
-                                DataBase.addName("Snr3", (i + 1).ToString(), grid_db[i, j].GetSnr(3).ToString(), j + 1);
+                                DataBase.addName("Snr3", (i + 1).ToString(), grid_db[i, j].GetSnr(3).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table14.NewRow();
                             row["lokalizacjaX"] = i;
@@ -274,7 +274,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(4);
                             todb_table14.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(4) != 0)
-                                DataBase.addName("Snr4", (i + 1).ToString(), grid_db[i, j].GetSnr(4).ToString(), j + 1);
+                                DataBase.addName("Snr4", (i + 1).ToString(), grid_db[i, j].GetSnr(4).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table15.NewRow();
                             row["lokalizacjaX"] = i;
@@ -282,7 +282,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(5);
                             todb_table15.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(5) != 0)
-                                DataBase.addName("Snr5", (i + 1).ToString(), grid_db[i, j].GetSnr(5).ToString(), j + 1);
+                                DataBase.addName("Snr5", (i + 1).ToString(), grid_db[i, j].GetSnr(5).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table16.NewRow();
                             row["lokalizacjaX"] = i;
@@ -290,7 +290,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(6);
                             todb_table16.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(6) != 0)
-                                DataBase.addName("Snr6", (i + 1).ToString(), grid_db[i, j].GetSnr(6).ToString(), j + 1);
+                                DataBase.addName("Snr6", (i + 1).ToString(), grid_db[i, j].GetSnr(6).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table17.NewRow();
                             row["lokalizacjaX"] = i;
@@ -298,7 +298,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(7);
                             todb_table17.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(7) != 0)
-                                DataBase.addName("Snr7", (i + 1).ToString(), grid_db[i, j].GetSnr(7).ToString(), j + 1);
+                                DataBase.addName("Snr7", (i + 1).ToString(), grid_db[i, j].GetSnr(7).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table18.NewRow();
                             row["lokalizacjaX"] = i;
@@ -306,7 +306,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(8);
                             todb_table18.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(8) != 0)
-                                DataBase.addName("Snr8", (i + 1).ToString(), grid_db[i, j].GetSnr(8).ToString(), j + 1);
+                                DataBase.addName("Snr8", (i + 1).ToString(), grid_db[i, j].GetSnr(8).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table19.NewRow();
                             row["lokalizacjaX"] = i;
@@ -314,7 +314,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(9);
                             todb_table19.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(9) != 0)
-                                DataBase.addName("Snr9", (i + 1).ToString(), grid_db[i, j].GetSnr(9).ToString(), j + 1);
+                                DataBase.addName("Snr9", (i + 1).ToString(), grid_db[i, j].GetSnr(9).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table20.NewRow();
                             row["lokalizacjaX"] = i;
@@ -322,7 +322,7 @@ namespace Radiowe
                             row["SNR"] = grid_db[i, j].GetSnr(10);
                             todb_table20.Rows.Add(row);
                             if (grid_db[i, j].GetSnr(10) != 0)
-                                DataBase.addName("Snr10", (i + 1).ToString(), grid_db[i, j].GetSnr(10).ToString(), j + 1);
+                                DataBase.addName("Snr10", (i + 1).ToString(), grid_db[i, j].GetSnr(10).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table21.NewRow();
                             row["lokalizacjaX"] = i;
@@ -330,7 +330,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(1);
                             todb_table21.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(1) != 0)
-                                DataBase.addName("Sinr1", (i + 1).ToString(), grid_db[i, j].GetSINR(1).ToString(), j + 1);
+                                DataBase.addName("Sinr1", (i + 1).ToString(), grid_db[i, j].GetSINR(1).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table22.NewRow();
                             row["lokalizacjaX"] = i;
@@ -338,7 +338,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(2);
                             todb_table22.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(2) != 0)
-                                DataBase.addName("Sinr2", (i + 1).ToString(), grid_db[i, j].GetSINR(2).ToString(), j + 1);
+                                DataBase.addName("Sinr2", (i + 1).ToString(), grid_db[i, j].GetSINR(2).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table23.NewRow();
                             row["lokalizacjaX"] = i;
@@ -346,7 +346,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(3);
                             todb_table23.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(3) != 0)
-                                DataBase.addName("Sinr3", (i + 1).ToString(), grid_db[i, j].GetSINR(3).ToString(), j + 1);
+                                DataBase.addName("Sinr3", (i + 1).ToString(), grid_db[i, j].GetSINR(3).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table24.NewRow();
                             row["lokalizacjaX"] = i;
@@ -354,7 +354,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(4);
                             todb_table24.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(4) != 0)
-                                DataBase.addName("Sinr4", (i + 1).ToString(), grid_db[i, j].GetSINR(4).ToString(), j + 1);
+                                DataBase.addName("Sinr4", (i + 1).ToString(), grid_db[i, j].GetSINR(4).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table25.NewRow();
                             row["lokalizacjaX"] = i;
@@ -362,7 +362,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(5);
                             todb_table25.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(5) != 0)
-                                DataBase.addName("Sinr5", (i + 1).ToString(), grid_db[i, j].GetSINR(5).ToString(), j + 1);
+                                DataBase.addName("Sinr5", (i + 1).ToString(), grid_db[i, j].GetSINR(5).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table26.NewRow();
                             row["lokalizacjaX"] = i;
@@ -370,7 +370,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(6);
                             todb_table26.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(6) != 0)
-                                DataBase.addName("Sinr6", (i + 1).ToString(), grid_db[i, j].GetSINR(6).ToString(), j + 1);
+                                DataBase.addName("Sinr6", (i + 1).ToString(), grid_db[i, j].GetSINR(6).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table27.NewRow();
                             row["lokalizacjaX"] = i;
@@ -378,7 +378,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(7);
                             todb_table27.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(7) != 0)
-                                DataBase.addName("Sinr7", (i + 1).ToString(), grid_db[i, j].GetSINR(7).ToString(), j + 1);
+                                DataBase.addName("Sinr7", (i + 1).ToString(), grid_db[i, j].GetSINR(7).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table28.NewRow();
                             row["lokalizacjaX"] = i;
@@ -386,7 +386,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(8);
                             todb_table28.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(8) != 0)
-                                DataBase.addName("Sinr8", (i + 1).ToString(), grid_db[i, j].GetSINR(8).ToString(), j + 1);
+                                DataBase.addName("Sinr8", (i + 1).ToString(), grid_db[i, j].GetSINR(8).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table29.NewRow();
                             row["lokalizacjaX"] = i;
@@ -394,7 +394,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(9);
                             todb_table29.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(9) != 0)
-                                DataBase.addName("Sinr9", (i + 1).ToString(), grid_db[i, j].GetSINR(9).ToString(), j + 1);
+                                DataBase.addName("Sinr9", (i + 1).ToString(), grid_db[i, j].GetSINR(9).ToString().Replace('.', ','), j + 1);
 
                             row = todb_table30.NewRow();
                             row["lokalizacjaX"] = i;
@@ -402,7 +402,7 @@ namespace Radiowe
                             row["SINR"] = grid_db[i, j].GetSINR(10);
                             todb_table30.Rows.Add(row);
                             if (grid_db[i, j].GetSINR(10) != 0)
-                                DataBase.addName("Sinr10", (i + 1).ToString(), grid_db[i, j].GetSINR(10).ToString(), j + 1);
+                                DataBase.addName("Sinr10", (i + 1).ToString(), grid_db[i, j].GetSINR(10).ToString().Replace('.', ','), j + 1);
                         }
                     }
                 }

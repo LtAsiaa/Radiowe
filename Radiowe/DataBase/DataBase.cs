@@ -111,11 +111,25 @@ namespace Radiowe
 
         //update dbo.Name1 set "2" =null where id=2 
 
-        public static void addName(string name, string cell, string vall,int id)
+
+        public static int a = 1;
+        public static void addName(string name, string cell, string vall, int id)
         {
-            cell = "\"" + cell + "\"";
-            Command(string.Format("update dbo.{0} set {1}='{2}' where ID='{3}' ", name,cell,vall,id));
+            try
+            {
+                cell = "\"" + cell + "\"";
+                Command(string.Format("update dbo.{0} set {1}='{2}' where ID='{3}' ", name, cell, vall, id));
+                a++;
+                Console.WriteLine(string.Format("Dodaje wynik do bazy {0}  {1}", a, name));
+            }
+            catch(Exception ex)
+            {
+
+                Console.WriteLine(string.Format("Blad  {0}", ex.Message), string.Format("update dbo.{0} set {1}='{2}' where ID='{3}' ", name, cell, vall, id));
+            }
+
         }
+
 
 
         public static DataTable GetData(int ID)

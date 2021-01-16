@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30503.244
+VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{26E5F9ED-39F7-4A0B-BCD9-47565806EADA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radiowe", "Radiowe\Radiowe.csproj", "{872B3332-B0A8-45F0-917F-CB92EAC1E64A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{26E5F9ED-39F7-4A0B-BCD9-47565806EADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26E5F9ED-39F7-4A0B-BCD9-47565806EADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26E5F9ED-39F7-4A0B-BCD9-47565806EADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26E5F9ED-39F7-4A0B-BCD9-47565806EADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872B3332-B0A8-45F0-917F-CB92EAC1E64A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872B3332-B0A8-45F0-917F-CB92EAC1E64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872B3332-B0A8-45F0-917F-CB92EAC1E64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872B3332-B0A8-45F0-917F-CB92EAC1E64A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E3274F31-BB40-46EF-8C8C-6E6954348FB7}
+		SolutionGuid = {C33141EA-DCCB-4F36-A9BC-246A011E6AD6}
 	EndGlobalSection
 EndGlobal

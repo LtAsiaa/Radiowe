@@ -51,12 +51,14 @@ namespace WpfApp1
         }
 
 
-        public static void plotStation2(Grid Grid2, DataTable name, DataTable users)
+        public static void plotStation2(Grid Grid2, DataTable name, DataTable SINR, DataTable SNR)
         {
             List<string> table = new List<string>();
             List<Color> colortab = new List<Color>();
             Color actualcolor = Color.FromArgb((byte)color.Next(0, 256), (byte)color.Next(0, 256), (byte)color.Next(0, 256), 255);
             string actualname = "";
+            string actualSINR = "";
+            string actualSNR = "";
             for (int i = 0; i < name.Rows.Count; i++)
             {
                 for (int j = 0; j < name.Columns.Count - 1; j++)
@@ -70,6 +72,8 @@ namespace WpfApp1
                             {
                                 actualcolor = colortab[x];
                                 actualname = name.Rows[i][j].ToString();
+                                actualSINR = SINR.Rows[i][j].ToString();
+                                actualSNR = SNR.Rows[i][j].ToString();
                                 break;
                             }
                             else if(x == table.Count - 1)
@@ -78,6 +82,8 @@ namespace WpfApp1
                                 actualcolor = Color.FromArgb(255, 255, (byte)color.Next(0, 256), (byte)color.Next(0, 256));
                                 colortab.Add(actualcolor);
                                 actualname = name.Rows[i][j].ToString();
+                                actualSINR = SINR.Rows[i][j].ToString();
+                                actualSNR = SNR.Rows[i][j].ToString();
                                 break;
                             }
                         }
@@ -87,6 +93,8 @@ namespace WpfApp1
                             actualcolor = Color.FromArgb((byte)color.Next(0, 256), (byte)color.Next(0, 256), (byte)color.Next(0, 256), 255);
                             colortab.Add(actualcolor);
                             actualname = name.Rows[i][j].ToString();
+                            actualSINR = SINR.Rows[i][j].ToString();
+                            actualSNR = SNR.Rows[i][j].ToString();
                         }
                         
                         if (o is TextBlock)
@@ -94,6 +102,8 @@ namespace WpfApp1
                             TextBlock tt = o as TextBlock;
                             tt.Text = actualname;
                             tt.Background = new SolidColorBrush(actualcolor);
+                            //tt.ToolTip = string.Format("X={0},Y={1}", x, y);
+                            tt.ToolTip = string.Format("X={0} Y={1} SINR={2} SNR={3}", i, j, actualSINR, actualSNR);
                             //tt.ToolTip = string.Format("ID:{0} X={1},Y={2}", (Int32)data.Rows[i][0], (int)data.Rows[i][3], (int)data.Rows[i][3]);
                         }
                     }

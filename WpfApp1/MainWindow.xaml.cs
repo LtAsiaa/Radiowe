@@ -28,8 +28,10 @@ namespace WpfApp1
 
         DataTable DTUsers;
         DataTable DTName;
+        DataTable DTSINR;
+        DataTable DTSNR;
 
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,11 +42,20 @@ namespace WpfApp1
             if (DataBase.Open())
             {
                 RadioBaza.IsChecked = true;
+                /*
+                for(int i = 0; i< 10; i++)
+                {
+                    DataBase.Command(string.Format("TRUNCATE TABLE dbo.Name{0}",i+1));
+                    //DataBase.Command(string.Format("TRUNCATE TABLE dbo.Name{0}", i + 1));
+                }
+                */
                 DTUsers = DataBase.BaseTable("dbo.Users2");
                 DataGridUsers.ItemsSource = DTUsers.DefaultView;
                 Plot.plotmap(Grid2, 200, 200);
                 DTName = DataBase.BaseTable("dbo.Name1");
-                Plot.plotStation2(Grid2, DTName, DTUsers);
+                DTSINR = DataBase.BaseTable("dbo.Sinr1");
+                DTSNR = DataBase.BaseTable("dbo.Snr1");
+                Plot.plotStation2(Grid2, DTName, DTSINR, DTSNR);
             }
             else
             {
@@ -289,13 +300,18 @@ namespace WpfApp1
             if (ComboBoxNumerKanaluMapa.Text == "")
             {
                 DTName = DataBase.BaseTable("dbo.Name1");
-                Plot.plotStation2(Grid2, DTName, DTUsers);
+                DTSINR = DataBase.BaseTable("dbo.Sinr1");
+                Plot.plotStation2(Grid2, DTName, DTSINR, DTSNR);
+
             }
             else
             {
                 string name = "dbo.Name" + ComboBoxNumerKanaluMapa.Text;
+                string SINR = "dbo.Sinr" + ComboBoxNumerKanaluMapa.Text;
                 DTName = DataBase.BaseTable(name);
-                Plot.plotStation2(Grid2, DTName, DTUsers);
+                DTSINR = DataBase.BaseTable(SINR);
+                Plot.plotStation2(Grid2, DTName, DTSINR, DTSNR);
+
             }
         }
 

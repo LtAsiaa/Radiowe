@@ -41,15 +41,15 @@
                     <TextBox x:Name="TextBoxNazwaUzytkownika" HorizontalAlignment="Left" Margin="141,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Height="24"/>
                     <Label Content="Nzawa użytkownika:" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
                     <Button x:Name="ButtonUsunUzytkownika" Content="Usuń użytkownika" HorizontalAlignment="Left" Margin="174,279,0,0" VerticalAlignment="Top" Click="ButtonUsunUzytkownika_Click" Height="24" Width="100"/>
-                    <DataGrid x:Name="DataGridUsers" HorizontalAlignment="Left" Height="624" Margin="297,30,0,0" VerticalAlignment="Top" Width="550" IsReadOnly="True"/>
+                    <DataGrid x:Name="DataGridUsers" HorizontalAlignment="Left" Height="624" Margin="297,10,0,0" VerticalAlignment="Top" Width="550" IsReadOnly="True"/>
                     <ComboBox x:Name="ComboBoxNumerKanalu" HorizontalAlignment="Left" Margin="141,233,0,0" VerticalAlignment="Top" Width="133" Height="24" Loaded="ComboBoxNumerKanalu_Loaded"/>
                     <Label Content="Zysk anteny odbiorczej:" HorizontalAlignment="Left" Margin="15,146,0,0" VerticalAlignment="Top" Height="24" Width="133"/>
                     <TextBox x:Name="TextBoxZyskAntenyO" HorizontalAlignment="Left" Height="24" Margin="152,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
                     <ComboBox x:Name="ComboBoxZO" HorizontalAlignment="Left" Margin="222,146,0,0" VerticalAlignment="Top" Width="52" Height="24" Loaded="ComboBoxZO_Loaded"/>
                     <Label Content="ACLR +1(dB):" HorizontalAlignment="Left" Margin="19,175,0,0" VerticalAlignment="Top" Height="24" Width="117"/>
                     <Label Content="ACLR +2(dB):" HorizontalAlignment="Left" Margin="19,204,0,0" VerticalAlignment="Top" Height="24" Width="117"/>
-                    <TextBox x:Name="TextBoxACLR1" HorizontalAlignment="Left" Height="24" Margin="141,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133"/>
-                    <TextBox x:Name="TextBoxACLR2" HorizontalAlignment="Left" Height="24" Margin="141,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133"/>
+                    <TextBox x:Name="TextBoxACLR1" HorizontalAlignment="Left" Height="24" Margin="141,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Text="40"/>
+                    <TextBox x:Name="TextBoxACLR2" HorizontalAlignment="Left" Height="24" Margin="141,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Text="20"/>
                 </Grid>
                 <RadioButton x:Name="RadioBaza" Content="Nie połączono" Margin="42,642,1378,53" Checked="RadioBazaChecked"/>
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="897,53,15,66">

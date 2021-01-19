@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Reflection;
+
 
 namespace WpfApp1
 {
@@ -30,7 +33,7 @@ namespace WpfApp1
         DataTable DTName;
         DataTable DTSINR;
         DataTable DTSNR;
-
+        DataGridRow row;
 
         public MainWindow()
         {
@@ -43,19 +46,23 @@ namespace WpfApp1
             {
                 RadioBaza.IsChecked = true;
                 /*
-                for(int i = 0; i< 10; i++)
+                for(int i = 0; i < 10; i++)
                 {
-                    DataBase.Command(string.Format("TRUNCATE TABLE dbo.Name{0}",i+1));
-                    //DataBase.Command(string.Format("TRUNCATE TABLE dbo.Name{0}", i + 1));
+                    DataBase.ClearDB(string.Format("dbo.Name{0}", i + 1));
+                    DataBase.ClearDB(string.Format("dbo.Snr{0}", i + 1));
+                    DataBase.ClearDB(string.Format("dbo.Sinr{0}", i + 1));
                 }
-                */
+                DataBase.Command("TRUNCATE TABLE dbo.Users2");*/
                 DTUsers = DataBase.BaseTable("dbo.Users2");
-                DataGridUsers.ItemsSource = DTUsers.DefaultView;
+                DataGridUsers.ItemsSource = DTUsers.DefaultView;                
+                
                 Plot.plotmap(Grid2, 200, 200);
                 DTName = DataBase.BaseTable("dbo.Name1");
                 DTSINR = DataBase.BaseTable("dbo.Sinr1");
                 DTSNR = DataBase.BaseTable("dbo.Snr1");
                 Plot.plotStation2(Grid2, DTName, DTSINR, DTSNR);
+                //Thread t = new Thread(new ThreadStart(DataGrid));
+               // t.Start();
             }
             else
             {
@@ -66,14 +73,10 @@ namespace WpfApp1
             //DataGridUsers.DataContext = DataBase.UserList();
             //Point t = PointToScreen(new Point(ActualWidth, ActualHeight));
             //TextBoxTest.Text = t;
-            
+
 
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
         private void ButtonDodajUzytkownika_Click(object sender, RoutedEventArgs e)
         {
 
@@ -132,7 +135,7 @@ namespace WpfApp1
                 }
                 else if (ComboBoxZN.Text == "W")
                 {
-                    _zyskAntenyN = 10 * Math.Log10((_zyskAntenyN * 1000)/0.001);
+                    _zyskAntenyN = 10 * Math.Log10((_zyskAntenyN * 1000) / 0.001);
                 }
 
                 double _zyskAntenyO = Convert.ToDouble(TextBoxZyskAntenyO.Text.Replace('.', ','));
@@ -159,9 +162,13 @@ namespace WpfApp1
                 var ZyskAntenyN = _zyskAntenyN.ToString().Replace(',', '.');
                 var ZyskAntenyO = _zyskAntenyO.ToString().Replace(',', '.');
                 var NrKanalu = int.Parse(ComboBoxNumerKanalu.Text);
-                DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza, ZyskAntenyN, ZyskAntenyO, NrKanalu);
+                var aclr1 = Convert.ToDouble(TextBoxACLR1.Text.Replace('.', ','));
+                var aclr2 = Convert.ToDouble(TextBoxACLR2.Text.Replace('.', ','));
+                string status = "oczekujacy";
+                DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza, ZyskAntenyN, ZyskAntenyO, NrKanalu, aclr1, aclr2, status);
                 DTUsers = DataBase.BaseTable("dbo.Users2");
                 DataGridUsers.ItemsSource = DTUsers.DefaultView;
+
                 //DataBase.Command(string.Format("INSERT dbo.Users(user1,x,y,moc,zysk,nrkanalu) VALUES ('{0}', {1}, {2}, {3}, {4}, {5});", TextBoxNazwaUzytkownika.Text.ToString(), int.Parse(TextBoxLokalizacjaX.Text), int.Parse(TextBoxLokalizacjaY.Text), _mocNadawcza.ToString().Replace(',', '.'), _zyskAntenyN.ToString().Replace(',', '.'), int.Parse(TextBoxNumerKanalu.Text)));
                 //DataGridUsers.ItemsSource = DataBase.UserList().DefaultView;
                 //Plot.plotStation(Grid2, int.Parse(TextBoxLokalizacjaX.Text), int.Parse(TextBoxLokalizacjaY.Text));
@@ -221,8 +228,8 @@ namespace WpfApp1
             {
                 TextBoxTest.Text = "no";
             }
-            
-            
+
+
 
         }
 
@@ -237,14 +244,14 @@ namespace WpfApp1
         // 4       S
         // antena_gain_base - zysk anteny dla stacji nadawczej
         // power_base -moc nadawcza stacji bazowej
-        private void BaseStationInitialization(int x_b, int y_b,int antena_gain_base,int power_base)
+        private void BaseStationInitialization(int x_b, int y_b, int antena_gain_base, int power_base)
         {
             // stworzenie stacji nadawczej:
             Base = new BaseStation(x_b, y_b, antena_gain_base, power_base);
         }
         // oznaczenia te same co dla stacji 
         // channel_number - numer kanału - warto aby GUI dodało sprawdzanie wpisywanych danych bo my w żaden sposob nie sprawdzamy czy kanał znajduje się w zakresie 1-10 - jeśli nie dacie rady to dajcie znać my zrobimy mechanizm sprawdzjący
-        private void UserInitialization(int x_u,int y_u, int antena_gain_user,int channel_number)
+        private void UserInitialization(int x_u, int y_u, int antena_gain_user, int channel_number)
         {
             user = new User(x_u, y_u, antena_gain_user, channel_number);
             ///
@@ -264,7 +271,7 @@ namespace WpfApp1
 
         private void RadioBazaChecked(object sender, RoutedEventArgs e)
         {
-            if((bool)RadioBaza.IsChecked == true)
+            if ((bool)RadioBaza.IsChecked == true)
             {
                 RadioBaza.Content = "Połączono";
             }
@@ -301,6 +308,7 @@ namespace WpfApp1
             {
                 DTName = DataBase.BaseTable("dbo.Name1");
                 DTSINR = DataBase.BaseTable("dbo.Sinr1");
+                DTSNR = DataBase.BaseTable("dbo.Snr1");
                 Plot.plotStation2(Grid2, DTName, DTSINR, DTSNR);
 
             }
@@ -308,8 +316,10 @@ namespace WpfApp1
             {
                 string name = "dbo.Name" + ComboBoxNumerKanaluMapa.Text;
                 string SINR = "dbo.Sinr" + ComboBoxNumerKanaluMapa.Text;
+                string SNR = "dbo.Snr" + ComboBoxNumerKanaluMapa.Text;
                 DTName = DataBase.BaseTable(name);
                 DTSINR = DataBase.BaseTable(SINR);
+                DTSNR = DataBase.BaseTable(SNR);
                 Plot.plotStation2(Grid2, DTName, DTSINR, DTSNR);
 
             }
@@ -329,5 +339,27 @@ namespace WpfApp1
             ComboBoxNumerKanalu.Items.Add(9);
             ComboBoxNumerKanalu.Items.Add(10);
         }
+        /*
+        private void DataGrid()
+        {
+            Thread.Sleep(5000);
+            try
+            {
+                for (int i = 0; i < DTUsers.Rows.Count; i++)
+                {
+                    if (DTUsers.Rows[i][10].ToString() == "oczekujacy")
+                    {
+                        DataGridRow row = (DataGridRow)DataGridUsers.ItemContainerGenerator.ContainerFromIndex(i);
+                        SolidColorBrush brush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 0));
+                        //Invoke(new Action(() => { TextBoxTest.Text = "Napis"; }));
+                        row.Background = brush;
+                        //DataGridUsers.Items. ;
+                    }
+                }
+            }
+            catch(InvalidCastException e) { }
+            
+        }
+        */
     }
 }

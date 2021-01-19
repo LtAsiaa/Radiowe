@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Radio.Models;
 
 namespace Radio.Pages
 {
     public class IndexModel : PageModel
     {
+        [BindProperty]
+        public AddStation Stacja { get; set; }
+        
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -21,14 +26,16 @@ namespace Radio.Pages
         {
 
         }
-        public void OnPost()
+        public IActionResult OnPost()
         {
+            if (ModelState.IsValid == false)
+            {
+                return Page();
+            }
 
+            return RedirectToPage("./Index1");
         }
 
-        protected virtual void btnLogin_Click1(EventArgs e)
-        {
-
-        }
+        
     }
 }

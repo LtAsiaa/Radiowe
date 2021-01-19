@@ -2,62 +2,49 @@
 @model IndexModel
 @{
     ViewData["Title"] = "";
-} 
+}
 
-<div class="text-center">
     <h3 class="display-4">Dodaj stację</h3>
-
-    <div class="dane_uzytkownika" align="left">
-        <label for="user">Nazwa użytkownika:</label>
-        <input type="text" id="user" name="user" size ="10"><br><br>
+    <form method="post">
+        <label for="nazwa">Nazwa użytkownika:</label> <input type="text" align="left" size="10" asp-for="Stacja.nazwa" /><br><br>
 
         <label for="moc">Moc nadawcza:</label>
-        <select id="moc">
-            <option value="dBm">dBm</option>
-            <option value="W">W</option>
-        </select><br><br>
+        <input type="number" min="0" asp-for="Stacja.moc"/>
+            <select id="moc">
+                <option value="dBm">dBm</option>
+                <option value="W">W</option>
+            </select><br><br>
 
-        <label for="location">Lokalizacja</label>
-        <label for="x">X:</label>
-        <input type="text" id="location" name="location" size ="2">
-        <label for="y">Y:</label>
-        <input type="text" id="location" name="location" size ="2"><br><br>
+            <label for="location">Lokalizacja</label>
+            <label for="x">X:</label>
+        <input type="number" min="0" asp-for="Stacja.x" size="2"/>
+            <label for="y">Y:</label>
+            <input type="number" min="0" asp-for="Stacja.y" size="2"/><br><br>
 
-        <label for="zyskN">Zysk anteny nadawczej:</label>
-        <select id="zyskN">
-            <option value="dBi">dBi</option>
-            <option value="W">W</option>
-        </select><br><br>
+            <label for="zyskN">Zysk anteny nadawczej:</label>
+            <input type="number" min="0" asp-for="Stacja.zysk"/>
+            <select id="zyskN">
+                <option value="dBi">dBi</option>
+                <option value="W">W</option>
+            </select><br><br>
 
-        <label for="zyskO">Zysk anteny odbiorczej:</label>
-        <select id="zyskO">
-            <option value="dBi">dBi</option>
-            <option value="W">W</option>
-        </select><br><br>
+            <label for="zyskO">Zysk anteny odbiorczej:</label>
+            <select id="zyskO">
+                <option value="dBi">dBi</option>
+                <option value="W">W</option>
+            </select><br><br>
 
-        <label for="aclr1">ACLR +1(dB):</label>
-        <input type="text" id="location" name="location" size ="10"><br><br>
+            <label for="aclr1">ACLR +1(dB):</label>
+            <input type="text" id="location" name="location" size="10"><br><br>
 
-        <label for="aclr2">ACLR +2(dB):</label>
-        <input type="text" id="location" name="location"size ="10"><br><br>
+            <label for="aclr2">ACLR +2(dB):</label>
+            <input type="text" id="location" name="location" size="10"><br><br>
 
         <label for="nrK">Numer kanału:</label>
-        <select id="nrK">
-            <option value="jeden">1</option>
-            <option value="dwa">2</option>
-            <option value="trzy">3</option>
-            <option value="cztery">4</option>
-            <option value="piec">5</option>
-            <option value="szesc">6</option>
-            <option value="siedem">7</option>
-            <option value="osiem">8</option>
-            <option value="dziewiec">9</option>
-            <option value="dziesiec">10</option>
-        </select><br><br>
+        <input type="number" min="1" max="10" asp-for="Stacja.nrkanalu"/>
+            <br><br>
 
-        <button type="submit" runat="server" class="button"  onserverClick="btnLogin_Click1">Dodaj użytkownika</button>
-        <button class="button1">Usuń użytkownika</button>
+            <button type="submit" Click="ButtonDodajUzytkownika_Click">Dodaj użytkownika</button>
+            <button type="submit">Usuń użytkownika</button>
+    </form>
 
-    </div>
-    
-</div>

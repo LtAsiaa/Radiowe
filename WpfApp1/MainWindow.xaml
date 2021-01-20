@@ -58,8 +58,8 @@
                         <Grid Name="Grid2" HorizontalAlignment="Left" Height="800" Margin="0,0,0,0" VerticalAlignment="Top" Width="800"/>
                     </Canvas>
                 </ScrollViewer>
-                <Label Content="Numer kanału:" HorizontalAlignment="Left" Margin="1296,638,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
-                <ComboBox x:Name="ComboBoxNumerKanaluMapa" Margin="1422,640,178,0" VerticalAlignment="Top" Loaded="ComboBoxNumerKanaluMapa_Loaded" DropDownClosed="ComboBoxNumerKanaluMapa_DropDownClosed"/>
+                <Label Content="Numer kanału:" HorizontalAlignment="Left" Margin="972,645,0,0" VerticalAlignment="Top" Width="121" Height="24"/>
+                <ComboBox x:Name="ComboBoxNumerKanaluMapa" Margin="1093,645,507,0" VerticalAlignment="Top" Loaded="ComboBoxNumerKanaluMapa_Loaded" DropDownClosed="ComboBoxNumerKanaluMapa_DropDownClosed"/>
             </Grid>
         </TabItem>
 

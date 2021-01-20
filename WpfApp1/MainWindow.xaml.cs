@@ -15,7 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Reflection;
-
+using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace WpfApp1
 {
@@ -34,6 +35,8 @@ namespace WpfApp1
         DataTable DTSINR;
         DataTable DTSNR;
         DataGridRow row;
+
+        public bool InvokeRequired { get; private set; }
 
         public MainWindow()
         {
@@ -54,15 +57,16 @@ namespace WpfApp1
                 }
                 DataBase.Command("TRUNCATE TABLE dbo.Users2");*/
                 DTUsers = DataBase.BaseTable("dbo.Users2");
-                DataGridUsers.ItemsSource = DTUsers.DefaultView;                
-                
+                DataGridUsers.ItemsSource = DTUsers.DefaultView;
+
                 Plot.plotmap(Grid2, 200, 200);
+
                 DTName = DataBase.BaseTable("dbo.Name1");
                 DTSINR = DataBase.BaseTable("dbo.Sinr1");
                 DTSNR = DataBase.BaseTable("dbo.Snr1");
                 Plot.plotStation2(Grid2, DTName, DTSINR, DTSNR);
-                //Thread t = new Thread(new ThreadStart(DataGrid));
-               // t.Start();
+                Thread t = new Thread(new ThreadStart(UPDATEDataGrid));
+                t.Start();
             }
             else
             {
@@ -217,9 +221,31 @@ namespace WpfApp1
             {
                 if (DataGridUsers.SelectedItem != null)
                 {
-                    Plot.deleteStation(Grid2, int.Parse((((DataRowView)DataGridUsers.SelectedItem).Row["x"]).ToString()), int.Parse((((DataRowView)DataGridUsers.SelectedItem).Row["y"]).ToString()));
-                    DataBase.Command(string.Format("delete from dbo.Users2 where ID= '{0}' ", ((DataRowView)DataGridUsers.SelectedItem).Row["ID"].ToString()));
-                    DataGridUsers.ItemsSource = DTUsers.DefaultView;
+                    //Plot.deleteStation(Grid2, int.Parse((((DataRowView)DataGridUsers.SelectedItem).Row["x"]).ToString()), int.Parse((((DataRowView)DataGridUsers.SelectedItem).Row["y"]).ToString()));
+                    //DataBase.Command(string.Format("delete from dbo.Users2 where ID= '{0}' ", ((DataRowView)DataGridUsers.SelectedItem).Row["ID"].ToString()));
+                    string ID = ((DataRowView)DataGridUsers.SelectedItem).Row["ID"].ToString();
+                    string kanal = ((DataRowView)DataGridUsers.SelectedItem).Row[4].ToString();
+                    DataBase.Command(string.Format("UPDATE dbo.Users2 SET Status= '{0}' WHERE ID= '{1}' ", "usunięty", ID));
+                    //DTUsers = DataBase.BaseTable("dbo.Users2");
+                    DTName = DataBase.BaseTable(string.Format("dbo.Name{0}", kanal));
+                    DTSINR = DataBase.BaseTable(string.Format("dbo.Sinr{0}", kanal));
+                    DTSNR = DataBase.BaseTable(string.Format("dbo.Snr{0}", kanal));
+                    for (int i = 0; i < DTName.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < DTName.Columns.Count -1; j++)
+                        {
+                            if (DTName.Rows[i][j].ToString() == ID)
+                            {
+                                DataBase.Command(string.Format("UPDATE dbo.Name{0} SET [{1}]='' WHERE ID= '{2}' ", kanal, j+1, i+1));
+                                DataBase.Command(string.Format("UPDATE dbo.SINR{0} SET [{1}]='' WHERE ID= '{2}' ", kanal, j+1, i+1));
+                                DataBase.Command(string.Format("UPDATE dbo.SNR{0} SET [{1}]='' WHERE ID= '{2}' ", kanal, j+1, i+1));
+                                //DTName.Rows[i][j] = "";
+                                //DTSINR.Rows[i][j] = "";
+                                //DTSNR.Rows[i][j] = "";
+                            }
+                        }
+                    }
+                    //DataGridUsers.ItemsSource = DTUsers.DefaultView;
 
                     TextBoxTest.Text = "ok";
                 }
@@ -228,9 +254,6 @@ namespace WpfApp1
             {
                 TextBoxTest.Text = "no";
             }
-
-
-
         }
 
         //wytłumacznie zmiennych dla kontrolera, gui i bazy danych:
@@ -338,6 +361,47 @@ namespace WpfApp1
             ComboBoxNumerKanalu.Items.Add(8);
             ComboBoxNumerKanalu.Items.Add(9);
             ComboBoxNumerKanalu.Items.Add(10);
+        }
+ 
+        private void UPDATEDataGrid()
+        {
+            while (true)
+            {
+                {
+                    try
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+                        {
+                            DataTable data = DataBase.BaseTable("dbo.Users2");
+
+                            if (DTUsers.Rows.Count == data.Rows.Count)
+                            {
+                                for (int i = 0; i < DTUsers.Rows.Count; i++)
+                                {
+                                    if (DTUsers.Rows[i][10].ToString() != data.Rows[i][10].ToString())
+                                    {
+                                        DataGridUsers.ItemsSource = data.DefaultView;
+                                        DTUsers = data;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                DataGridUsers.ItemsSource = data.DefaultView;
+                                DTUsers = data;
+                            }
+                 
+                         }));
+
+                    }
+                    catch (Exception ex)
+                    {
+                        //MessageBox.Show(this, ex.Message, "Error message");
+                        return;
+                    }
+                }
+                Thread.Sleep(1000);
+            }
         }
         /*
         private void DataGrid()

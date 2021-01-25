@@ -170,6 +170,30 @@ namespace WpfApp1
                 var aclr2 = Convert.ToDouble(TextBoxACLR2.Text.Replace('.', ','));
                 string status = "oczekujacy";
                 DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza, ZyskAntenyN, ZyskAntenyO, NrKanalu, aclr1, aclr2, status);
+
+                Thread.Sleep(2000);
+                DTUsers = DataBase.BaseTable("dbo.Users2");
+                DataRow lastRow = DTUsers.Rows[DTUsers.Rows.Count - 1];
+                if (lastRow["Status"].ToString() == "odrzucony")
+                {
+                    var MocNadawcza_10 = (_mocNadawcza - 1).ToString().Replace(',', '.');
+                    DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza_10, ZyskAntenyN, ZyskAntenyO, NrKanalu, aclr1, aclr2, status);
+                }
+                Thread.Sleep(2000);
+                DTUsers = DataBase.BaseTable("dbo.Users2");
+                lastRow = DTUsers.Rows[DTUsers.Rows.Count - 1];
+                if (lastRow["Status"].ToString() == "odrzucony")
+                {
+                    DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza, ZyskAntenyN, ZyskAntenyO, ((NrKanalu + 2) % 10) + 1, aclr1, aclr2, status);
+                }
+                Thread.Sleep(2000);
+                DTUsers = DataBase.BaseTable("dbo.Users2");
+                lastRow = DTUsers.Rows[DTUsers.Rows.Count - 1];
+                if (lastRow["Status"].ToString() == "odrzucony")
+                {
+                    DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza, ZyskAntenyN, ZyskAntenyO, ((NrKanalu + 4) % 10) + 1, aclr1, aclr2, status);
+                }
+
                 DTUsers = DataBase.BaseTable("dbo.Users2");
                 DataGridUsers.ItemsSource = DTUsers.DefaultView;
 

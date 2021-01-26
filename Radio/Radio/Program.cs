@@ -14,6 +14,7 @@ namespace Radio
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            DataBase.Open();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Radio.Models;
+using System.Data;
 
 namespace Radio.Pages
 {
     public class IndexModel : PageModel
     {
+        private DataTable User;
+
         [BindProperty]
         public AddStation Stacja { get; set; }
         
@@ -20,6 +23,7 @@ namespace Radio.Pages
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
+            //User = DataBase.BaseTable("Users2");
         }
 
         public void OnGet()

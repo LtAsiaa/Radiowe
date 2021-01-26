@@ -1,0 +1,76 @@
+﻿@page
+@model Radio.Pages.Shared.MapaModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<canvas id="canvas" width="400" height="400"></canvas> 
+<SECTION style="border-style: solid; border-width: 2px; width: 1024px;">  
+    <CANVAS HEIGHT="740" WIDTH="1024px" ID="canvas">   
+        Your browser is not supporting HTML5 Canvas. Upgrade Browser to view this program or check with Chrome or in Firefox.  
+    </CANVAS>  
+</SECTION>  
+
+<SCRIPT>
+
+//public Canvas object to use in all the functions.
+//Main canvas declaration
+    var canvas;
+    var ctx;
+    var x = 75;
+    var y = 50;
+    //Width and Height of the canvas
+    var WIDTH = 1024;
+    var HEIGHT = 740;
+    //    var dragok = false;
+//Global color variable which will be used to store the selected color name.
+    var Colors="";
+    var newPaint = false;
+    var DrawingTypes = "";
+    //Circle default radius size
+    var radius = 30;
+    var radius_New = 30;
+    // Rectangle array
+    rect = {},
+    //drag= false defult to test for the draging
+drag = false;
+// Array to store all the old Shanpes drawing details
+    var rectStartXArray = new Array();
+    var rectStartYArray = new Array();
+    var rectWArray = new Array();
+    var rectHArray = new Array();
+    var rectColor = new Array();
+    var DrawType_ARR = new Array();
+    var radius_ARR = new Array();
+    var Text_ARR = new Array();
+    // Declared for the Free hand pencil Drawing.
+    var prevX = 0,
+    currX = 0,
+    prevY = 0,
+    currY = 0;
+    //to add the Image
+    var imageObj = new Image();
+//Initialize the Canvas and Mouse events for Canvas
+    function init(DrawType) {
+        newPaint = true;
+        canvas = document.getElementById("canvas");
+        x =5;
+        y = 5;
+        DrawingTypes = DrawType;
+        ctx = canvas.getContext("2d");
+        radius = 30;
+        radius_New = radius;
+        canvas.addEventListener('mousedown', mouseDown, false);
+        canvas.addEventListener('mouseup', mouseUp, false);
+        canvas.addEventListener('mousemove', mouseMove, false);
+        imageObj.src = 'images/Afraz.jpg';
+
+        return setInterval(draw, 10);
+    }
+    </SCRIPT>
+</body>
+</html>

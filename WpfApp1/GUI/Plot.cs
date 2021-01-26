@@ -103,7 +103,7 @@ namespace WpfApp1
                             tt.Text = actualname;
                             tt.Background = new SolidColorBrush(actualcolor);
                             //tt.ToolTip = string.Format("X={0},Y={1}", x, y);
-                            tt.ToolTip = string.Format("X={0} Y={1} SINR={2} SNR={3}", i, j, actualSINR, actualSNR);
+                            tt.ToolTip = string.Format("X={0}km Y={1}km SINR={2} SNR={3}", i, j, actualSINR, actualSNR);
                             //tt.ToolTip = string.Format("ID:{0} X={1},Y={2}", (Int32)data.Rows[i][0], (int)data.Rows[i][3], (int)data.Rows[i][3]);
                         }
                     }

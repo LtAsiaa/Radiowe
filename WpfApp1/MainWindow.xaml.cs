@@ -280,18 +280,6 @@ namespace WpfApp1
             ///
         }
 
-        private void onSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //var tc = sender as TabControl;
-            if (TabItemMapa != null && TabItemMapa.IsSelected)
-            {
-                //MessageBox.Show("ładowanie mapy");
-                //Plot.plot(Grid2, 10, 50, 50);
-
-                //Do Stuff ...
-            }
-        }
-
         private void RadioBazaChecked(object sender, RoutedEventArgs e)
         {
             if ((bool)RadioBaza.IsChecked == true)

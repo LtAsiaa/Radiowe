@@ -197,11 +197,54 @@ namespace WpfApp1
                 DTUsers = DataBase.BaseTable("dbo.Users2");
                 DataGridUsers.ItemsSource = DTUsers.DefaultView;
 
+                DataRow lastRow; //= DTUsers.Rows[DTUsers.Rows.Count - 1];
+
+                //string ID = lastRow["ID"].ToString();
+                //DataBase.Command(string.Format("UPDATE dbo.Users2 SET Status= '{0}' WHERE ID= '{1}' ", "odrzucony", ID));
+                Thread.Sleep(10000);
+                do
+                {
+                    DTUsers = DataBase.BaseTable("dbo.Users2");
+                    lastRow = DTUsers.Rows[DTUsers.Rows.Count - 1];
+                } while (lastRow["Status"].ToString() == "oczekujacy");
+                DataGridUsers.ItemsSource = DTUsers.DefaultView;
+                Thread.Sleep(10000);
+                if (lastRow["Status"].ToString() == "odrzucony")
+                {
+                    var MocNadawcza_10 = (_mocNadawcza - 1).ToString().Replace(',', '.');
+                    DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza_10, ZyskAntenyN, ZyskAntenyO, NrKanalu, aclr1, aclr2, status);
+                }
+                do
+                {
+                    //Thread.Sleep(20);
+                    DTUsers = DataBase.BaseTable("dbo.Users2");
+                    lastRow = DTUsers.Rows[DTUsers.Rows.Count - 1];
+                } while (lastRow["Status"].ToString() == "oczekujacy");
+                DataGridUsers.ItemsSource = DTUsers.DefaultView;
+                Thread.Sleep(10000);
+                if (lastRow["Status"].ToString() == "odrzucony")
+                {
+                    DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza, ZyskAntenyN, ZyskAntenyO, ((NrKanalu + 2) % 10) + 1, aclr1, aclr2, status);
+                }
+                do
+                {
+                    //Thread.Sleep(20);
+                    DTUsers = DataBase.BaseTable("dbo.Users2");
+                    lastRow = DTUsers.Rows[DTUsers.Rows.Count - 1];
+                } while (lastRow["Status"].ToString() == "oczekujacy");
+                if (lastRow["Status"].ToString() == "odrzucony")
+                {
+                    DataBase.AddUser(NazwaUzytkownika, LokalizacjaX, LokalizacjaY, MocNadawcza, ZyskAntenyN, ZyskAntenyO, ((NrKanalu + 4) % 10) + 2, aclr1, aclr2, status);
+                }
+
                 //DataBase.Command(string.Format("INSERT dbo.Users(user1,x,y,moc,zysk,nrkanalu) VALUES ('{0}', {1}, {2}, {3}, {4}, {5});", TextBoxNazwaUzytkownika.Text.ToString(), int.Parse(TextBoxLokalizacjaX.Text), int.Parse(TextBoxLokalizacjaY.Text), _mocNadawcza.ToString().Replace(',', '.'), _zyskAntenyN.ToString().Replace(',', '.'), int.Parse(TextBoxNumerKanalu.Text)));
                 //DataGridUsers.ItemsSource = DataBase.UserList().DefaultView;
                 //Plot.plotStation(Grid2, int.Parse(TextBoxLokalizacjaX.Text), int.Parse(TextBoxLokalizacjaY.Text));
                 //DataBase.Open();
                 //DataBase.Data
+                DTUsers = DataBase.BaseTable("dbo.Users2");
+                DataGridUsers.ItemsSource = DTUsers.DefaultView;
+                return;
             }
         }
         private void ComboBoxM_Loaded(object sender, RoutedEventArgs e)

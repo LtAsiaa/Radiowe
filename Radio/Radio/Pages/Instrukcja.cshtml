@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "";
+}
+
+<h3 class="display-4">Instrukcja użytkownika</h3>
+
+<p>
+    Aplikacja Wid-Control ma pomóc w wyznaczeniu odpowiednich parametrów do podstawienie stacji nadawczo-odbiorczej w odpowiedniej lokalizacji. <br>
+    Niniejsza instrukcja ma na celu wprowadzenie użytkowników w aplikację oraz omówienie wszystkich jej funkcjonalności
+</p>
+
+<h4>Rejestracja i logowanie do systemu (w trakcie realizacji)</h4>
+
+<p>
+    Dostęp do aplikacji Wid-Control realizowany jest poprzez mechanizm kont użytkownika. Konta są identyfikowane poprzez nazwę użytkownika i hasło. Jeśli nie posiadamy konta, należy kliknąć „Sign up” w prawym dolnym rogu. Strona przeniesie nas do systemu rejestracji
+    (Rys. 1.2). Po udanej rejestracji można przystąpić do logowania (Rys. 1.1). Wpisujemy swoje dane podane podczas rejestracji. Jeśli, zapomnimy hasła, mamy możliwość odzyskania
+    go klikając „Forgot password” po lewej stronie.
+</p>
+<br><img src="1.png" >
+<br><img src="2.png" >
+
+<br>
+<h4>Dodawanie stacji w aplikacji internetowej (w trakcie realizacji)</h4>
+<p>Po zalogowaniu się wyświetla nam się obraz przedstawiony na rysunku 1.3.  W celu dodania użytkownika do systemu należy uzupełnić wszystkie pola i zatwierdzić przyciskiem ”Dodaj użytkownika”. Jeżeli nasza lokalizacja nam nie odpowiada, albo po prostu chcemy zrezygnować z systemu należy wprowadzić dane lokalizacyjne i zatwierdzić przyciskiem ”Usuń użytkownika”.</p>
+<br><img src="3.png" >
+
+<br>
+<h4>Dodawanie stacji w aplikacji  desktopowej</h4>
+<p>Korzystanie z aplikacji jest możliwe dopiero po wprowadzeniu danych logowania. Na rysunku 1.4 przedstawiono okno, w którym należy wprowadzić hasło użytkownika (w 1 wersji aplikacji jest jedno hasło dla wszystkich. W kolejnych wersjach po wprowadzeniu działania aplikacji webowej, hasło będzie inne dla każdego użytkownika).</p>
+<br>
+<img src="4.png" >
+<br><p>Po prawidłowym wprowadzeniu danych logowania ukazuje się nam okno widoczne na rysunku 1.5. W okienki podajemy dane stacji, jaką użytkownik chce umieścić na mapie W aplikacji jest możliwośc wybrania wygodnych dla nas jednostek liczbowych, które są później odpowiednio przeliczane. Wszystkie wprowadzone dane są przesyłane oraz zapisywane do odpowiedniej tabeli w bazie danych.
+    Na środku widnieje tabela, z której możemy odczytać użytkowników znajdujących się aktualnie w systemie oraz ich wybrane parametry. Obok tabeli znajduje się mapa, na której umiejscowieni są użytkownicy zgodnie z prowadzoną lokalizacją. Gdy najedziemy kursorem na danego użytkownika możemy zobaczyć parametry istniejących już stacji. Aktualizacja mapy odbywa się ręcznie poprzez chwilową zmiane numeru kanału. Lista użytkowników i statusów aktualizuje się automatycznie. Kliknięcie przycisku „usuń użytkownika” powoduje usunięcię użytkownika z bazy danych. 
+</p>
+    <br><img src="5.png">

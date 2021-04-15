@@ -7,18 +7,17 @@ using Radiowe.Interfaces;
 namespace Radiowe
 {
     public class Cell : IPrint, ICellManagment
-    {// Id X Y 10x double liczba 10x Id_base_station 
+    {
         public Cell()
         {
 
         }
-        public Cell(Cell cell) //konstruktor kopiujący
+        public Cell(Cell cell) 
         {
             this.station_ = cell.station_;
             this.InitializeCell();
             for (int i = 1; i < cell.cell_info_.Count; i++)
             {
-                //Console.WriteLine("I " + i);
                 this.EditList(cell.cell_info_[i - 1].Item1, cell.cell_info_[i - 1].Item2, cell.cell_info_[i - 1].Item3, i);
             }
             for (int i = 0; i < cell.snr_station_.Count; i++)
@@ -29,7 +28,7 @@ namespace Radiowe
 
         public void Print(int type)
         {
-            if (type == 0)// wyświetlanie w siatce tylko S - stacja
+            if (type == 0)
             {
                 if (station_ != null)
                 {
@@ -39,8 +38,7 @@ namespace Radiowe
                 {
                     if (snr_station_.Count != 0 && (snr_station_[0].Item1) > 6d)
                     {
-                        //Console.Write(snr_station_[0].Item1);
-                        //Console.WriteLine("SNR: " + snr_station_[0].Item1);
+              
                         if (Convert.ToInt32(snr_station_[0].Item1) < 10)
                         {
                             Console.Write("0" + Convert.ToInt32(snr_station_[0].Item1) + "|");
@@ -59,7 +57,7 @@ namespace Radiowe
                 }
 
             }
-            else // wyświetlanie S U i SNR
+            else 
             {
 
             }
@@ -73,14 +71,13 @@ namespace Radiowe
             {
                 if (station_ != null)
                 {
-                    //Console.Write("X |");
+                   
                 }
                 else
                 {
                     if (cell_info_.Count != 0 && (cell_info_[0].Item2) > 6d)
                     {
-                        //Console.Write(snr_station_[0].Item1);
-                        //Console.WriteLine("SNR: " + snr_station_[0].Item1);
+                       
                         if (Convert.ToInt32(cell_info_[0].Item2) < 10)
                         {
                             Console.Write("0" + Convert.ToInt32(cell_info_[0].Item2) + "|");
@@ -114,14 +111,13 @@ namespace Radiowe
 
             if (station_ != null)
             {
-                //Console.Write("X |");
+          
             }
             else
             {
                 if (cell_info_.Count != 0 && (cell_info_[0].Item2) > 0d)
                 {
-                    //Console.Write(snr_station_[0].Item1);
-                    //Console.WriteLine("SNR: " + snr_station_[0].Item1);
+                  
                     if (Convert.ToInt32(cell_info_[0].Item2) < 10)
                     {
                         Console.Write("0" + Convert.ToInt32(cell_info_[0].Item2) + "!");
@@ -272,8 +268,6 @@ namespace Radiowe
 
         public void AddToList2(string BaseName, double SNR, double SINR, int channel)
         {
-            //     cell_info_.RemoveAt(channel - 1);
-            //     cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
             cell_info_[channel - 1] = new Tuple<string, double, double>(BaseName, SNR, SINR);
 
         }
@@ -283,11 +277,7 @@ namespace Radiowe
         }
         public void EditList(string BaseName, double SNR, double SINR, int channel)
         {
-            //Console.WriteLine("kanal: " + channel);
             cell_info_[channel - 1] = new Tuple<string, double, double>(BaseName, SNR, SINR);
-            //Console.WriteLine("edytuje : " + (channel - 1));
-            //cell_info_.this.AddToList2(BaseName)
-            //cell_info_.Insert(channel - 1, Tuple.Create(BaseName, SNR, SINR));
             for (int i = 0; i < cell_info_.Count; i++)
             {
                 if (cell_info_[i].Item1 == BaseName)

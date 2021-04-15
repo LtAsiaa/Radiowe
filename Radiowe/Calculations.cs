@@ -112,33 +112,9 @@ namespace Radiowe
         {
             Console.WriteLine("stary sinr: " + old_SINR + " nowy sinr: " + new_SINR);
             double roznica = 10 * Math.Log10(Math.Abs(Math.Pow(10, old_SINR / 10) - Math.Pow(10, new_SINR / 10)));
-            //Console.WriteLine("nowy sinr:" + new_SINR);
-            //Console.WriteLine("ToReplaceSinr: " + Math.Log10(Math.Pow(10, old_SINR / 10)) + " drugi człon " + Math.Pow(10, new_SINR / 10));
-            Console.WriteLine("ROZNICA: " + roznica);
-            //if(Double.IsNaN(roznica))
-            //{
-            ////    return old_SINR;
-            //}
+
             return roznica;
         }
-
-        /*
-        public void CalculateSINR_ACLR() // różne kanały, pytanie
-        {
-            // sprawdzanie w jakim kanale nadaje stacja zakłócająca; 
-            //...
-            //
-            N_linear = Math.Pow(10, N_ / 10) / 1000;
-            // dla ch+1
-            I_linear = Math.Pow(10, (I_ - 40) / 10) / 1000;
-            double suma = 10 * Math.Log10(N_linear + I_linear) + 30;
-            SINR_ = receiver_power  - suma;
-            //dla ch+2
-            I_linear = Math.Pow(10, (I_ - 60) / 10) / 1000;
-            suma = 10 * Math.Log10(N_linear + I_linear) + 30;
-            SINR_ = receiver_power  - suma;
-        }
-        */
 
     }
 }
